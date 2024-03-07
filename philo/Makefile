@@ -18,7 +18,8 @@ MAGENTA = \033[95m
 NAME = philo
 HEADER = philo.h
 
-FILES =
+FILES = main	\
+		utils
 
 SRCS = $(addsuffix .c, $(FILES))
 OBJS_DIR = .objs/
