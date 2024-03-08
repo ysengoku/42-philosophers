@@ -30,10 +30,10 @@ SRCS = $(addsuffix .c, $(FILES))
 HEADERS = $(addprefix $(INCLUDE), $(HEADER_FILES))
 OBJS_DIR = .objs/
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
+DEPS = $(OBJS:.o=.d)
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -I$(INCLUDE)
-RM = rm -f
 
 all:
 	$(MAKE) $(NAME)
@@ -47,11 +47,11 @@ $(OBJS_DIR)%.o: %.c $(HEADERS)
 	@mkdir -p $(OBJS_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@ -MMD -MP
 
--include $(OBJS:.o=.d)
+-include $(DEPS)
 
 clean:
 	@printf "$(MAGENTA)$(BOLD)Cleaning...\n$(RESET)"
-	$(RM) -r $(OBJS)
+	$(RM) -r $(OBJS_DIR)
 
 fclean: clean
 	$(RM) $(NAME)
