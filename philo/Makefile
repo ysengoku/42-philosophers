@@ -6,7 +6,7 @@
 #    By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 08:36:17 by yusengok          #+#    #+#              #
-#    Updated: 2024/03/08 08:55:46 by yusengok         ###   ########.fr        #
+#    Updated: 2024/03/08 11:35:03 by yusengok         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,19 +16,23 @@ LIGHT_GREEN = \033[32m
 MAGENTA = \033[95m
 
 NAME = philo
-HEADER = philo.h
+INCLUDE = includes/
 
 FILES = main	\
-		utils
+		parsing	\
+		utils	\
+		error_handling
+
+HEADER_FILES = philo.h
 
 vpath %c srcs
 SRCS = $(addsuffix .c, $(FILES))
+HEADERS = $(addprefix $(INCLUDE), $(HEADER_FILES))
 OBJS_DIR = .objs/
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I .
-INCLUDE = -I .
+CFLAGS = -Wall -Wextra -Werror -I$(INCLUDE)
 RM = rm -f
 
 all:
@@ -39,18 +43,20 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $^ -o $@
 	@printf "$(LIGHT_GREEN)$(BOLD)philo is ready to launch\n$(RESET)"
 
-$(OBJS_DIR)%.o: %.c $(HEADER)
+$(OBJS_DIR)%.o: %.c $(HEADERS)
 	@mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE)
+	$(CC) $(CFLAGS) -c $< -o $@ -MMD -MP
+
+-include $(OBJS:.o=.d)
 
 clean:
 	@printf "$(MAGENTA)$(BOLD)Cleaning...\n$(RESET)"
-	@$(RM) -r $(OBJS)
+	$(RM) -r $(OBJS)
 
 fclean: clean
-	@$(RM) $(NAME)
+	$(RM) $(NAME)
 
 re: fclean
 	$(MAKE) all
 
-.PHONY all clean fclean re
+.PHONY: all clean fclean re

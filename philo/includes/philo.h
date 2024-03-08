@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 08:37:30 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/08 10:34:32 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/08 11:16:07 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,24 +45,28 @@ typedef struct s_philo
 
 typedef struct s_data
 {
-	int		philos_count;
-	long	time_to_eat;
-	long	time_to_die;
-	long	time_to_sleep;
+	int		philos_count; // int
+	long	time_to_eat; // millisecond = 1/1000 second
+	long	time_to_die; // millisecond
+	long	time_to_sleep; // millisecond
+	int		meal_to_must_eat; // int
 	t_philo	*philos;
 	t_fork	*forks;
 }				t_data;
 
 /* ----- error messages ----- */
-# define INVALID_ARGC "Invalid number of arguments.\n"
-# define NEGATIVE_NBR "Negative number is not accepted.\n"
-# define INVALID_NBR "Input is not valid number.\n"
+# define MALLOC_FAILED "Memory allocation failed."
+# define INVALID_ARGC "Invalid number of arguments."
+# define NEGATIVE_NBR "Negative number is not accepted."
+# define INVALID_NBR "Input is not valid number."
+
+/* ----- check & parsing ----- */
+int		check_arg(int argc, char **argv, t_data *data);
 
 /* ----- utils ----- */
 size_t	ft_strlen(char *str);
-int		ft_atoi_pos(char *arg);
 
 /* ----- error handling  ----- */
-int	ft_error(char *message);
+int		ft_error(char *message);
 
 #endif
