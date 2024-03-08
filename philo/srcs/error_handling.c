@@ -14,6 +14,7 @@
 
 int	ft_error(char *message)
 {
+	printf(RED "[Error] " RESET);
 	printf("%s\n", message);
 	return (1);
 }

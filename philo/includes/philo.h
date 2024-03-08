@@ -13,7 +13,7 @@
 #ifndef PHILO_H
 # define PHILO_H
 
-/* ----- libraries ----- */
+/* --- libraries ------------------------------------------------------------ */
 # include <string.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -22,14 +22,13 @@
 # include <pthread.h>
 # include <limits.h>
 
-/* ----- colors ----- */
+/* --- colors --------------------------------------------------------------- */
 # define RED "\033[1;31m"
 # define GREEN "\033[1;32m"
 # define CYAN "\033[1;36m"
 # define RESET "\033[0m"
 
-/* ----- structures ----- */
-
+/* --- structures ----------------------------------------------------------- */
 typedef struct s_fork
 {
 	int				id;
@@ -46,27 +45,37 @@ typedef struct s_philo
 typedef struct s_data
 {
 	int		philos_count; // int
-	long	time_to_eat; // millisecond = 1/1000 second
-	long	time_to_die; // millisecond
-	long	time_to_sleep; // millisecond
-	int		meal_to_must_eat; // int
+	int		time_to_die; // millisecond
+	int		time_to_eat; // millisecond = 1/1000 second
+	int		time_to_sleep; // millisecond
+	int		meals_to_eat; // int
 	t_philo	*philos;
 	t_fork	*forks;
 }				t_data;
 
-/* ----- error messages ----- */
+/* --- error messages ------------------------------------------------------- */
 # define MALLOC_FAILED "Memory allocation failed."
-# define INVALID_ARGC "Invalid number of arguments."
+# define INVALID_ARGC "Invalid number of arguments.\n\
+Usage: ./philo (number_of_philosophers) (time_to_die) (time_to_eat) \
+(time_to_sleep) (optional: number_of_times_each_philosopher_must_eat)"
+# define TOOFEW_PHILO "There must be at least 1 philosopher."
 # define NEGATIVE_NBR "Negative number is not accepted."
 # define INVALID_NBR "Input is not valid number."
 
-/* ----- check & parsing ----- */
-int		check_arg(int argc, char **argv, t_data *data);
+/* --- state messages ------------------------------------------------------- */
+# define TAKE_FORK " has taken a fork\n"
+# define EAT " is eating\n"
+# define SLEEP " is sleeping\n"
+# define THINK " is thinking\n"
+# define DIE " died\n"
 
-/* ----- utils ----- */
+/* --- check & parsing ------------------------------------------------------ */
+int		check_arg(char **argv, t_data *data);
+
+/* --- utils ---------------------------------------------------------------- */
 size_t	ft_strlen(char *str);
 
-/* ----- error handling  ----- */
+/* --- error handling  ------------------------------------------------------ */
 int		ft_error(char *message);
 
 #endif

@@ -14,14 +14,14 @@
 
 int	main(int argc, char **argv)
 {
-	t_data	*data;
+	t_data	data;
 
-	data = malloc(sizeof(t_data));
-	if (!data)
-		ft_error(MALLOC_FAILED);
+	if (argc < 5 || argc > 6)
+		return (ft_error(INVALID_ARGC));
 /*--- Check argc & argv ---*/
-	if (check_arg(argc, argv, data) == 1)
+	if (check_arg(argv, &data) == 1)
 		return (1);
+
 
 /*--- Init data ---*/
 
@@ -31,6 +31,6 @@ int	main(int argc, char **argv)
 
 /*--- Clear & free ---*/
 	
-	free(data);
+	//free
 	return (0);
 }
