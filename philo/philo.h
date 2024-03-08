@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 08:37:30 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/05 08:57:30 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/08 10:34:32 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,19 @@
 # define PHILO_H
 
 /* ----- libraries ----- */
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/time.h>
-#include <pthread.h>
+# include <string.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <sys/time.h>
+# include <pthread.h>
+# include <limits.h>
+
+/* ----- colors ----- */
+# define RED "\033[1;31m"
+# define GREEN "\033[1;32m"
+# define CYAN "\033[1;36m"
+# define RESET "\033[0m"
 
 /* ----- structures ----- */
 
@@ -42,13 +49,20 @@ typedef struct s_data
 	long	time_to_eat;
 	long	time_to_die;
 	long	time_to_sleep;
-	s_philo	*philos;
-	s_fork	*forks;
+	t_philo	*philos;
+	t_fork	*forks;
 }				t_data;
 
 /* ----- error messages ----- */
-# define INVALID_ARGC "Invalid number of arguments\nUsage: ./philo (number_of_philosophers) (time_to_die) (time_to_eat) (time_to_sleep) (optional: number_of_times_each_philosopher_must_eat)\n"
+# define INVALID_ARGC "Invalid number of arguments.\n"
+# define NEGATIVE_NBR "Negative number is not accepted.\n"
+# define INVALID_NBR "Input is not valid number.\n"
 
 /* ----- utils ----- */
 size_t	ft_strlen(char *str);
+int		ft_atoi_pos(char *arg);
+
+/* ----- error handling  ----- */
+int	ft_error(char *message);
+
 #endif
