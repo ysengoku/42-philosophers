@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 08:56:06 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/08 10:59:51 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/08 11:40:50 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ int	main(int argc, char **argv)
 
 /*--- Clear & free ---*/
 	
-	// free(data);
+	free(data);
 	return (0);
 }
