@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 08:56:06 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/08 11:40:50 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/11 09:32:54 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ int	main(int argc, char **argv)
 /*--- Check argc & argv ---*/
 	if (check_arg(argv, &data) == 1)
 		return (1);
-
-
 /*--- Init data ---*/
 
 
