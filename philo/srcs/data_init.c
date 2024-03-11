@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:18:48 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/11 13:38:46 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/11 14:48:39 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@ int	init_forks(t_data *data)
 	int	i;
 
 	i = 0;
-	// data->forks = malloc(data->philos_count * sizeof(t_fork));
-	// if (!(data->forks))
-	// 	ft_error(MALLOC_FAILED);
 	while (i < data->philos_count)
 	{
 		pthread_mutex_init(&(data->forks[i]), NULL);
@@ -31,7 +28,7 @@ int	init_forks(t_data *data)
 int	init_philos(t_data *data)
 {
 	int	i;
-	
+
 	i = 0;
 	data->philos = malloc(data->philos_count * sizeof(t_philo));
 	if (!(data->philos))
