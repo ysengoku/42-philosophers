@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 13:30:46 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/11 15:09:14 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/11 15:26:51 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 static void	routine(t_data *data, int i);
 static void	wait_forks(t_data *data, int i, struct timeval *now);
 
-void	*start_routine(t_data *data)
+void	*start_routine(void *arg)
 {
-
+	 (void)arg; //temporay setting
+	 return (NULL); //temporay setting
 }
 
 static void	routine(t_data *data, int i)

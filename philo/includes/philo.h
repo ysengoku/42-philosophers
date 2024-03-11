@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 08:37:30 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/11 15:13:42 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/11 15:23:42 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int		init_philos(t_data *data);
 int		clear_forks(t_data *data);
 
 /* --- routine -------------------------------------------------------------- */
-void	*start_routine(t_data *data);
+void	*start_routine(void *arg);
 
 /* --- utils ---------------------------------------------------------------- */
 size_t	ft_strlen(char *str);
