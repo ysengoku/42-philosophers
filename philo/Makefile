@@ -6,7 +6,7 @@
 #    By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 08:36:17 by yusengok          #+#    #+#              #
-#    Updated: 2024/03/11 09:35:55 by yusengok         ###   ########.fr        #
+#    Updated: 2024/03/11 11:45:08 by yusengok         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,8 @@ INCLUDE = includes/
 
 FILES = main	\
 		parsing	\
+		data_init	\
+		data_clear	\
 		utils	\
 		error_handling
 
