@@ -6,12 +6,18 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 09:30:20 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/11 09:31:12 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/11 09:35:21 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_MESSAGE_H
 # define PHILO_MESSAGE_H
+
+/* --- colors --------------------------------------------------------------- */
+# define RED "\033[1;31m"
+# define GREEN "\033[1;32m"
+# define CYAN "\033[1;36m"
+# define RESET "\033[0m"
 
 /* --- error messages ------------------------------------------------------- */
 # define MALLOC_FAILED "Memory allocation failed."

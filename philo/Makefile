@@ -6,7 +6,7 @@
 #    By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 08:36:17 by yusengok          #+#    #+#              #
-#    Updated: 2024/03/11 09:31:41 by yusengok         ###   ########.fr        #
+#    Updated: 2024/03/11 09:35:55 by yusengok         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ FILES = main	\
 		error_handling
 
 HEADER_FILES = philo.h	\
-				philo_message.h
+				philo_print.h
 
 vpath %c srcs
 SRCS = $(addsuffix .c, $(FILES))
