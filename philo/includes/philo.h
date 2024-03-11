@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 08:37:30 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/11 09:36:04 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/11 11:12:16 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_data
 {
 	int		philos_count; // int
 	int		time_to_die; // millisecond
-	int		time_to_eat; // millisecond = 1/1000 second
+	int		time_to_eat; // millisecond : 1 millisecond == 1000 microseconds
 	int		time_to_sleep; // millisecond
 	int		meals_to_eat; // int
 	t_philo	*philos;
