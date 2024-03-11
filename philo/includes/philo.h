@@ -6,14 +6,14 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 08:37:30 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/11 09:32:07 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/11 09:36:04 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-# include "philo_message.h"
+# include "philo_print.h"
 
 /* --- libraries ------------------------------------------------------------ */
 # include <string.h>
@@ -23,12 +23,6 @@
 # include <sys/time.h>
 # include <pthread.h>
 # include <limits.h>
-
-/* --- colors --------------------------------------------------------------- */
-# define RED "\033[1;31m"
-# define GREEN "\033[1;32m"
-# define CYAN "\033[1;36m"
-# define RESET "\033[0m"
 
 /* --- structures ----------------------------------------------------------- */
 typedef struct s_fork
