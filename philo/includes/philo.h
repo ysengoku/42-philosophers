@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 08:37:30 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/11 14:28:04 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/11 15:13:42 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@
 
 typedef struct s_philo
 {
-	pthread_t		thread;
-	int				id;
+	pthread_t	*restrict	thread;
+	int						id;
 	// t_fork		fork_r;
 	// t_fork		fork_l;
-	pthread_mutex_t	fork_r;
-	pthread_mutex_t	fork_l;
-	long			last_meal_time;
-	int				meals_eaten;
+	pthread_mutex_t			fork_r;
+	pthread_mutex_t			fork_l;
+	long					last_meal_time;
+	int						meals_eaten;
 }				t_philo;
 
 typedef struct s_data
@@ -68,6 +68,7 @@ void	*start_routine(t_data *data);
 
 /* --- utils ---------------------------------------------------------------- */
 size_t	ft_strlen(char *str);
+long	milliseconds(struct timeval tv);
 
 /* --- error handling  ------------------------------------------------------ */
 int		ft_error(char *message);
