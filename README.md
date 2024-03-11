@@ -16,6 +16,9 @@ struct timeval
   suseconds_t tv_usec;    /* microseconds */
 };
 
+// time_t: Used for time in seconds. According to POSIX, it is an integer type.
+// suseconds_t: Used for time in microseconds. It is a signed integer type capable of storing values at least in the range [-1, 1000000].
+
 // We won't use tz(timezone) in this program, so we set it NULL.
 ```
 Example:  
@@ -36,3 +39,29 @@ int main(void)
 // * Unix epoch: 00:00:00, January 1, 1970
 ```
 
+### usleep()
+```c
+#include <unistd.h>
+int usleep(useconds_t usec);
+
+// useconds_t: Used for time in microseconds. It is an unsigned integer type capable of storing values at least in the range [0, 1000000].
+```
+The  usleep() function suspends execution of the calling thread for (at least) usec microseconds.  
+The sleep may be lengthened slightly by any system activity or by the time spent processing the call or by the granularity of system timers.  
+*cf. man usleep(3)*  
+
+Example:
+```c
+#include <stdio.h>
+#include <unistd.h>
+
+int main(void)
+{
+  printf("Sleep in\n");
+  usleep(500000);
+  printf("Awake.\n");
+  return (0);
+}
+```
+
+ 
