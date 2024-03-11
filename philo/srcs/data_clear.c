@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:44:38 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/11 11:48:38 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/11 14:50:10 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@ int	clear_forks(t_data *data)
 	i = 0;
 	while (i < data->philos_count)
 	{
-		pthread_mutex_destroy(&(data->forks[i].mutex));
+		pthread_mutex_destroy(&(data->forks[i]));
 		i++;
 	}
-	free(data->forks);
 	return (0);
 }
