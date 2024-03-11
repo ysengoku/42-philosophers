@@ -48,7 +48,7 @@ int usleep(useconds_t usec);
 ```
 The  usleep() function suspends execution of the calling thread for (at least) usec microseconds.  
 The sleep may be lengthened slightly by any system activity or by the time spent processing the call or by the granularity of system timers.  
-*cf. man usleep(3)*  
+*cf. [man usleep(3)](https://man7.org/linux/man-pages/man3/usleep.3.html)*
 
 Example:
 ```c
@@ -57,8 +57,8 @@ Example:
 
 int main(void)
 {
-  printf("Sleep in\n");
-  usleep(500000);
+  printf("Sleep in...\n");
+  usleep(4200000);
   printf("Awake.\n");
   return (0);
 }
