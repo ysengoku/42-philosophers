@@ -1,4 +1,4 @@
-# Philosphers
+# Philosophers
 Program to solve the famous dining pholosophers problem with thread and mutex.
 
 ## Authorized functions
