@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 08:54:29 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/08 11:01:53 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/11 15:14:04 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,9 @@ size_t	ft_strlen(char *str)
 	while (str[len])
 		len++;
 	return (len);
+}
+
+long	milliseconds(struct timeval tv)
+{
+    return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
