@@ -12,10 +12,9 @@
 
 #include "philo.h"
 
-static void	wait_forks(t_data *data, int i, struct timeval *now);
-static void	philo_eats(t_data *data, int i, struct timeval *now);
-static void	philo_sleeps(t_data *data, int i, struct timeval *now);
-static void	philo_thinks(int i, struct timeval *now);
+static void	wait_forks(t_data *data, int i);
+static void	eat(t_data *data, int i);
+static void	sleep_then_think(t_data *data, int i);
 
 void	*start_routine(void *arg)
 {
@@ -25,22 +24,18 @@ void	*start_routine(void *arg)
 
 void	routine(t_data *data, int i)
 {
-	struct timeval	now;
-
-	gettimeofday(&now, NULL);
-	data->philos[i].last_meal_time = ft_milliseconds(now);
+	data->philos[i].last_meal_time = get_current_time();
 	while (data->philos[i].is_alive == 1)
 	{
 		// lock mutex death -----> will be unlock when die
 		// lock mutex meal -----> will be unlock when he finished all meals
-		wait_forks(data, i, &now); // check time to die & unlock mutex death if die
-		philo_eats(data, i, &now);
-		philo_sleeps(data, i, &now);	
-		philo_thinks(i, &now);
+		wait_forks(data, i); // check time to die & unlock mutex death if die
+		eat(data, i);
+		sleep_then_think(data, i);	
 	}
 }
 
-static void	wait_forks(t_data *data, int i, struct timeval *now)
+static void	wait_forks(t_data *data, int i)
 {
 	pthread_mutex_t	*fork1;
 	pthread_mutex_t	*fork2;
@@ -57,34 +52,25 @@ static void	wait_forks(t_data *data, int i, struct timeval *now)
 	}
 	// check if time to die
 	pthread_mutex_lock(fork1);
-	gettimeofday(now, NULL);
-	printf("%ld %d %s", ft_milliseconds(*now), i + 1, TAKE_FORK);
+	printf("%ld %d %s", get_current_time(), i + 1, TAKE_FORK);
 	// check if time to die
 	pthread_mutex_lock(fork2);
-	gettimeofday(now, NULL);
-	printf("%ld %d %s", ft_milliseconds(*now), i + 1, TAKE_FORK);
+	printf("%ld %d %s", get_current_time(), i + 1, TAKE_FORK);
 }
 
-static void	philo_eats(t_data *data, int i, struct timeval *now)
+static void	eat(t_data *data, int i)
 {
-		printf("%ld %d %s", ft_milliseconds(*now), i + 1, EAT);
-		usleep(data->time_to_eat * 1000);
-		gettimeofday(&now, NULL);
-		data->philos[i].last_meal_time = ft_milliseconds(*now);
-		data->philos[i].meals_eaten++;
-		pthread_mutex_unlock(&(data->philos[i].fork_r));
-		pthread_mutex_unlock(&(data->philos[i].fork_l));
+	printf("%ld %d %s", get_current_time(), i + 1, EAT);
+	usleep(data->time_to_eat * 1000);
+	data->philos[i].last_meal_time = get_current_time();
+	data->philos[i].meals_eaten++;
+	pthread_mutex_unlock(&(data->philos[i].fork_r));
+	pthread_mutex_unlock(&(data->philos[i].fork_l));
 }
 
-static void	philo_sleeps(t_data *data, int i, struct timeval *now)
+static void	sleep_then_think(t_data *data, int i)
 {	
-	gettimeofday(&now, NULL);
-	printf("%ld %d %s", ft_milliseconds(*now), i + 1, SLEEP);
+	printf("%ld %d %s", get_current_time(), i + 1, SLEEP);
 	usleep(data->time_to_sleep * 1000);
-}
-
-static void	philo_thinks(int i, struct timeval *now)
-{
-	gettimeofday(&now, NULL);
-	printf("%ld %d %s", ft_milliseconds(*now), i + 1, THINK);
+	printf("%ld %d %s", get_current_time(), i + 1, THINK);
 }
