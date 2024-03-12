@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:44:38 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/12 14:35:03 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/12 15:07:28 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ int	clear_mutex(t_data *data)
 	{
 		pthread_mutex_destroy(&(data->forks[i]));
 		pthread_mutexattr_destroy(&(data->deaths[i]));
+		pthread_mutexattr_destroy(&(data->meals[i]));
 		i++;
 	}
 	free(data->forks);
 	free(data->deaths);
+	free(data->meals);
 	return (0);
 }
 

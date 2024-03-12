@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 13:30:46 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/12 14:23:21 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/12 15:09:26 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	routine(t_data *data, int i)
 	while (data->philos[i].is_alive == 1)
 	{
 		// lock mutex death -----> will be unlock when die
+		// lock mutex meal -----> will be unlock when he finished all meals
 		wait_forks(data, i, &now); // check time to die & unlock mutex death if die
 		philo_eats(data, i, &now);
 		philo_sleeps(data, i, &now);	
