@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 08:37:30 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/11 15:23:42 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/12 14:39:16 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "philo_print.h"
 
-/* --- libraries ------------------------------------------------------------ */
+/*----- libraries ------------------------------------------------------------*/
 # include <string.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -24,23 +24,18 @@
 # include <pthread.h>
 # include <limits.h>
 
-/* --- structures ----------------------------------------------------------- */
-// typedef struct s_fork
-// {
-// 	int				id;
-// 	pthread_mutex_t	mutex;
-// }				t_fork;
-
+/*----- structures -----------------------------------------------------------*/
 typedef struct s_philo
 {
-	pthread_t	*restrict	thread;
-	int						id;
-	// t_fork		fork_r;
-	// t_fork		fork_l;
-	pthread_mutex_t			fork_r;
-	pthread_mutex_t			fork_l;
-	long					last_meal_time;
-	int						meals_eaten;
+	pthread_t		thread;
+	t_data			*data;
+	int				id;
+	pthread_mutex_t	*fork_r;
+	pthread_mutex_t	*fork_l;
+	long			last_meal_time;
+	int				meals_eaten;
+	int				is_alive;
+	pthread_mutex_t	*death;
 }				t_philo;
 
 typedef struct s_data
@@ -53,24 +48,26 @@ typedef struct s_data
 	t_philo			*philos;
 	// t_fork	*forks;
 	pthread_mutex_t	*forks;
+	pthread_mutex_t	*deaths;
 }				t_data;
 
-/* --- check & parsing ------------------------------------------------------ */
+/*----- check & parsing ------------------------------------------------------*/
 int		check_arg(char **argv, t_data *data);
 
-/* --- data init & clear ---------------------------------------------------- */
-int		init_forks(t_data *data);
+/*----- data init & clear ----------------------------------------------------*/
+int		init_mutex(t_data *data);
 int		init_philos(t_data *data);
-int		clear_forks(t_data *data);
+int		clear_mutex(t_data *data);
+int		clear_philos(t_data *data);
 
-/* --- routine -------------------------------------------------------------- */
+/*----- routine --------------------------------------------------------------*/
 void	*start_routine(void *arg);
 
-/* --- utils ---------------------------------------------------------------- */
+/*----- utils ----------------------------------------------------------------*/
 size_t	ft_strlen(char *str);
-long	milliseconds(struct timeval tv);
+long	ft_milliseconds(struct timeval time);
 
-/* --- error handling  ------------------------------------------------------ */
+/*----- error handling  ------------------------------------------------------*/
 int		ft_error(char *message);
 
 #endif

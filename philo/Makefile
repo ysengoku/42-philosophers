@@ -6,7 +6,7 @@
 #    By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 08:36:17 by yusengok          #+#    #+#              #
-#    Updated: 2024/03/11 13:32:35 by yusengok         ###   ########.fr        #
+#    Updated: 2024/03/12 14:40:14 by yusengok         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ FILES = main	\
 		data_init	\
 		data_clear	\
 		routine	\
+		monitor	\
 		utils	\
 		error_handling
 
