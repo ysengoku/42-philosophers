@@ -12,6 +12,16 @@
 
 #include "philo.h"
 
+void	ft_free(t_data *data)
+{
+	if (data->forks)
+		free(data->forks);
+	if (data->deaths)
+		free(data->deaths);
+	if (data->meals)
+		free(data->meals);	
+}
+
 int	clear_mutex(t_data *data)
 {
 	int	i;

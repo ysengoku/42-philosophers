@@ -20,15 +20,20 @@ int	init_mutex(t_data *data)
 	data->forks = malloc(data->philos_count * sizeof(pthread_mutex_t));
 	data->deaths = malloc(data->philos_count * sizeof(pthread_mutex_t));
 	data->meals = malloc(data->philos_count * sizeof(pthread_mutex_t));
-	if (!data->forks == NULL)
-		ft_error(MALLOC_FAILED);
-	if (!data->deaths == NULL)
-		ft_error(MALLOC_FAILED);
+	if (!data->forks || !data->deaths || !data->meals)
+	{
+		ft_free(data);
+		return (ft_error(MALLOC_FAILED));
+	}
 	while (i < data->philos_count)
 	{
-		pthread_mutex_init(&(data->forks[i]), NULL);
-		pthread_mutex_init(&(data->deaths[i]), NULL);
-		pthread_mutex_init(&(data->meals[i]), NULL);
+		if (pthread_mutex_init(&(data->forks[i]), NULL) != 0 ||
+			pthread_mutex_init(&(data->deaths[i]), NULL) != 0 ||
+			pthread_mutex_init(&(data->meals[i]), NULL) != 0)
+		{
+			ft_free(data);
+			return (ft_error(MUTEX_INIT_FAILED));
+		}
 		i++;
 	}
 	return (0);
@@ -45,16 +50,10 @@ int	init_philos(t_data *data)
 	while (i < data->philos_count)
 	{
 		data->philos[i].id = i + 1;
-		if (i == 0)
-			data->philos[i].fork_r = &(data->forks[data->philos_count - 1]);
-		else
-			data->philos[i].fork_r = &(data->forks[i - 1]);
-		if (i == data->philos_count - 1)
-			data->philos[i].fork_l = &(data->forks[0]);
-		else
-			data->philos[i].fork_l = &(data->forks[i + 1]);
 		data->philos[i].last_meal_time = 0;
 		data->philos[i].meals_eaten = 0;
+		data->philos[i].fork_r = &(data->forks[i]);
+		data->philos[i].fork_l = &(data->forks[(i + 1) % data->philos_count]);
 		// assign death mutex
 		// assign meal mutex
 		data->philos[i].is_alive = 1; ///---> need it ?

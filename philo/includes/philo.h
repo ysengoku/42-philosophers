@@ -30,11 +30,11 @@ typedef struct s_philo
 	pthread_t		thread;
 	t_data			*data;
 	int				id;
-	pthread_mutex_t	*fork_r;
-	pthread_mutex_t	*fork_l;
 	long			last_meal_time;
 	int				meals_eaten;
 	int				is_alive;
+	pthread_mutex_t	*fork_r;
+	pthread_mutex_t	*fork_l;
 	pthread_mutex_t	*death;
 }				t_philo;
 
@@ -60,13 +60,15 @@ int		init_mutex(t_data *data);
 int		init_philos(t_data *data);
 int		clear_mutex(t_data *data);
 int		clear_philos(t_data *data);
+void	ft_free(t_data *data);
 
 /*----- routine --------------------------------------------------------------*/
 void	*start_routine(void *arg);
 
 /*----- utils ----------------------------------------------------------------*/
 size_t	ft_strlen(char *str);
-long	ft_milliseconds(struct timeval time);
+long	get_current_time(void);
+//long	ft_milliseconds(struct timeval time);
 
 /*----- error handling  ------------------------------------------------------*/
 int		ft_error(char *message);

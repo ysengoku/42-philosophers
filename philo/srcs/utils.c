@@ -22,7 +22,14 @@ size_t	ft_strlen(char *str)
 	return (len);
 }
 
-long	ft_milliseconds(struct timeval time)
+//long	ft_milliseconds(struct timeval time)
+//{
+//    return (time.tv_sec * 1000 + time.tv_usec / 1000);
+//}
+
+long	get_current_time(void)
 {
-    return (time.tv_sec * 1000 + time.tv_usec / 1000);
+	struct timeval	now;
+	gettimeofday(&now, NULL);
+	return (now.tv_sec * 1000 + now.tv_usec / 1000);
 }

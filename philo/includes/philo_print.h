@@ -21,6 +21,7 @@
 
 /* --- error messages ------------------------------------------------------- */
 # define MALLOC_FAILED "Memory allocation failed."
+# define MUTEX_INIT_FAILED "Failed to initialize mutex."
 # define INVALID_ARGC "Invalid number of arguments.\n\
 Usage: ./philo (number_of_philosophers) (time_to_die) (time_to_eat) \
 (time_to_sleep) (optional: number_of_times_each_philosopher_must_eat)"
