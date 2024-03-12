@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:18:48 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/12 14:35:48 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/12 15:10:13 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	init_mutex(t_data *data)
 	i = 0;
 	data->forks = malloc(data->philos_count * sizeof(pthread_mutex_t));
 	data->deaths = malloc(data->philos_count * sizeof(pthread_mutex_t));
+	data->meals = malloc(data->philos_count * sizeof(pthread_mutex_t));
 	if (!data->forks == NULL)
 		ft_error(MALLOC_FAILED);
 	if (!data->deaths == NULL)
@@ -27,6 +28,7 @@ int	init_mutex(t_data *data)
 	{
 		pthread_mutex_init(&(data->forks[i]), NULL);
 		pthread_mutex_init(&(data->deaths[i]), NULL);
+		pthread_mutex_init(&(data->meals[i]), NULL);
 		i++;
 	}
 	return (0);
@@ -53,7 +55,9 @@ int	init_philos(t_data *data)
 			data->philos[i].fork_l = &(data->forks[i + 1]);
 		data->philos[i].last_meal_time = 0;
 		data->philos[i].meals_eaten = 0;
-		data->philos[i].is_alive = 1;
+		// assign death mutex
+		// assign meal mutex
+		data->philos[i].is_alive = 1; ///---> need it ?
 		pthread_create(data->philos[i].thread, NULL, start_routine, data);
 		i++;
 	}

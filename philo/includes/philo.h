@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 08:37:30 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/12 14:39:16 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/12 15:06:15 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_data
 	// t_fork	*forks;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	*deaths;
+	pthread_mutex_t	*meals;
 }				t_data;
 
 /*----- check & parsing ------------------------------------------------------*/
