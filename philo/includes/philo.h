@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 08:37:30 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/13 11:27:50 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:05:14 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@
 typedef struct s_data	t_data;
 
 # define EATING 1
-# define FINISHED 2
-# define SLEEPING 3
-# define THINKING 4
+# define SLEEPING 2
+# define THINKING 3
 # define DEAD 0
 
 typedef struct s_philo
 {
 	pthread_t		tid;
+	int				is_running;
 	t_data			*data;
 	int				id;
 	int				status;
@@ -44,8 +44,6 @@ typedef struct s_philo
 	pthread_mutex_t	*fork_r;
 	pthread_mutex_t	*fork_l;
 	pthread_mutex_t	*status_mutex;
-	// pthread_mutex_t	*death;
-	// pthread_mutex_t	*meals;
 }				t_philo;
 
 typedef struct s_data
@@ -55,7 +53,6 @@ typedef struct s_data
 	int				time_to_eat; // millisecond : 1 millisecond == 1000 microseconds
 	int				time_to_sleep; // millisecond
 	int				meals_to_eat; // -1 if it's not given in arguments
-	int				finished_philos;
 	t_philo			*philos;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	*status_mutex;
@@ -66,21 +63,24 @@ typedef struct s_data
 int		check_arg(char **argv, t_data *data);
 int		init_mutex(t_data *data);
 int		init_philos(t_data *data);
-int		clear_mutex(t_data *data);
-int		clear_thread(t_data *data);
+void	clear_mutex(t_data *data);
+// int		clear_thread(t_data *data);
 void	ft_free(t_data *data);
 
 /*----- routine --------------------------------------------------------------*/
-void	start_routine(t_data *data);
+int		start_routine(t_data *data);
 void	*routine(void *arg);
 void	*monitor_status(void *arg);
 
 /*----- utils ----------------------------------------------------------------*/
 size_t	ft_strlen(char *str);
-long	get_current_time(void);
-//long	ft_milliseconds(struct timeval time);
+long	current_time(void);
+void	update_status(t_philo *philo, int new_status);
 
 /*----- error handling  ------------------------------------------------------*/
 int		ft_error(char *message);
+int		ft_error_free(char *message, t_data *data);
+int		ft_error_clear_mutex(char *message, t_data *data);
+int		handle_thread_error(t_data *data, int i);
 
 #endif

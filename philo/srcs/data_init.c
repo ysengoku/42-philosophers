@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:18:48 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/13 11:44:28 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/13 14:30:25 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,19 @@ int	init_mutex(t_data *data)
 	data->forks = malloc(data->philos_count * sizeof(pthread_mutex_t));
 	data->status_mutex = malloc(data->philos_count * sizeof(pthread_mutex_t));
 	if (!data->forks || !data->status_mutex)
-	{
-		ft_free(data);
-		return (ft_error(MALLOC_FAILED));
-	}
+		return (ft_error_free(MALLOC_FAILED, data));
 	while (i < data->philos_count)
 	{
-		if (pthread_mutex_init(&(data->forks[i]), NULL) != 0 ||
-			pthread_mutex_init(&(data->status_mutex[i]), NULL) != 0)
+		if (pthread_mutex_init(&(data->forks[i]), NULL) != 0
+			|| pthread_mutex_init(&(data->status_mutex[i]), NULL) != 0)
 		{
-			// need to destroy mutex before return
-			ft_free(data);
-			return (ft_error(MUTEX_INIT_FAILED));
+			while (i > 0)
+			{
+				pthread_mutex_destroy(&(data->forks[i]));
+				pthread_mutex_destroy(&(data->status_mutex[i]));
+				i--;
+			}
+			return (ft_error_free(MUTEX_INIT_FAILED, data));
 		}
 		i++;
 	}
@@ -45,11 +46,7 @@ int	init_philos(t_data *data)
 	i = 0;
 	data->philos = malloc(data->philos_count * sizeof(t_philo));
 	if (!(data->philos))
-	{
-		// need to destroy mutex if exists before return
-		ft_free(data);
-		ft_error(MALLOC_FAILED);
-	}
+		return (ft_error_clear_mutex(MALLOC_FAILED, data));
 	while (i < data->philos_count)
 	{
 		data->philos[i].data = &data;
@@ -60,7 +57,7 @@ int	init_philos(t_data *data)
 		data->philos[i].fork_l = &(data->forks[(i + 1) % data->philos_count]);
 		data->philos[i].status_mutex = &(data->status_mutex[i]);
 		data->philos[i].status = THINKING;
-		pthread_create(&(data->philos[i].tid), NULL, start_routine, data);
+		data->philos[i].is_running = 1;
 		i++;
 	}
 	return (0);
