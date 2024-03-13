@@ -30,9 +30,9 @@ long	current_time(void)
 	return (now.tv_sec * 1000 + now.tv_usec / 1000);
 }
 
-void	update_status(t_philo *philo, int new_status)
+void	update_state(t_philo *philo, int new_state)
 {
-	pthread_mutex_lock(&(philo->status_mutex));
-	philo->status = new_status;
-	pthread_mutex_unlock(&(philo->status_mutex));
+	pthread_mutex_lock(philo->state_mutex);
+	philo->state = new_state;
+	pthread_mutex_unlock(philo->state_mutex);
 }

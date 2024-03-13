@@ -12,10 +12,10 @@
 
 #include "philo.h"
 
-static int	get_args(char **argv, t_data *data);
+static int	get_args(int argc, char **argv, t_data *data);
 static int	ft_atoi_philo(char *arg);
 
-int	check_arg(char **argv, t_data *data)
+int	check_arg(int argc, char **argv, t_data *data)
 {
 	int	i;
 	int	j;
@@ -37,12 +37,12 @@ int	check_arg(char **argv, t_data *data)
 			j++;
 		}
 	}
-	if (get_args(argv, data) == 1)
+	if (get_args(argc, argv, data) == 1)
 		return (ft_error(INVALID_NBR));
 	return (0);
 }
 
-static int	get_args(char **argv, t_data *data)
+static int	get_args(int argc, char **argv, t_data *data)
 {
 	data->philos_count = ft_atoi_philo(argv[1]);
 	if (data->philos_count == -1)
@@ -56,7 +56,7 @@ static int	get_args(char **argv, t_data *data)
 	data->time_to_sleep = ft_atoi_philo(argv[4]);
 	if (data->time_to_sleep == -1)
 		return (1);
-	if (argv[5])
+	if (argc == 6)
 	{
 		data->meals_to_eat = ft_atoi_philo(argv[5]);
 		if (data->meals_to_eat == -1)
@@ -64,6 +64,7 @@ static int	get_args(char **argv, t_data *data)
 	}
 	else
 		data->meals_to_eat = -1;
+	data->end = 0;
 	return (0);
 }
 
