@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-static void	wait_forks(t_philo *philo);
+static int	wait_forks(t_philo *philo);
 static void	eat(t_philo *philo);
 static void	sleep_then_think(t_philo *philo);
 
@@ -23,6 +23,7 @@ int	start_routine(t_data *data)
 	i = 0;
 	while (i < data->philos_count)
 	{
+		data->philos[i].last_meal_time = current_time();
 		if (pthread_create(&(data->philos[i].tid), NULL, routine,
 				(void *)&data->philos[i]) != 0)
 			return (handle_thread_error(data, i));
@@ -45,30 +46,31 @@ void	*routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	philo->last_meal_time = current_time();
 	if (philo->is_running)
 	{
 		while (!philo->data->end)
 		{
-			wait_forks(philo);
 			if (!still_alive(philo))
 			{
 				update_state(philo, DEAD);
 				return (0);
 			}
-			eat(philo);
-			if (philo->meals_count == philo->data->meals_to_eat)
+			if (wait_forks(philo) == 0)
 			{
-				philo->data->philos_count--;
-				return (0);
+				eat(philo);
+				if (philo->meals_count == philo->data->meals_to_eat)
+				{
+					philo->data->philos_count--;
+					return (0);
+				}
+				sleep_then_think(philo);
 			}
-			sleep_then_think(philo);
 		}
 	}
 	return (0);
 }
 
-static void	wait_forks(t_philo *philo)
+static int	wait_forks(t_philo *philo)
 {
 	if (philo->id % 2 == 0)
 		pthread_mutex_lock(philo->fork_r);
@@ -76,10 +78,23 @@ static void	wait_forks(t_philo *philo)
 		pthread_mutex_lock(philo->fork_l);
 	printf("%ld %d %s", current_time(), philo->id, TAKE_FORK);
 	if (philo->id % 2 == 0)
-		pthread_mutex_lock(philo->fork_l);
+	{
+		if (pthread_mutex_lock(philo->fork_l) != 0)
+		{
+			pthread_mutex_unlock(philo->fork_r);
+			return (1);
+		}
+	}
 	else
-		pthread_mutex_lock(philo->fork_r);
+	{
+		if (pthread_mutex_lock(philo->fork_r) != 0)
+		{
+			pthread_mutex_unlock(philo->fork_l);
+			return (1);
+		}
+	}
 	printf("%ld %d %s", current_time(), philo->id, TAKE_FORK);
+	return (0);
 }
 
 static void	eat(t_philo *philo)
