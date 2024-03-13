@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 08:54:29 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/12 11:04:55 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:06:26 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,17 @@ size_t	ft_strlen(char *str)
 	return (len);
 }
 
-//long	ft_milliseconds(struct timeval time)
-//{
-//    return (time.tv_sec * 1000 + time.tv_usec / 1000);
-//}
-
-long	get_current_time(void)
+long	current_time(void)
 {
 	struct timeval	now;
+
 	gettimeofday(&now, NULL);
 	return (now.tv_sec * 1000 + now.tv_usec / 1000);
+}
+
+void	update_status(t_philo *philo, int new_status)
+{
+	pthread_mutex_lock(&(philo->status_mutex));
+	philo->status = new_status;
+	pthread_mutex_unlock(&(philo->status_mutex));
 }
