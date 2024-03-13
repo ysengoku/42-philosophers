@@ -12,8 +12,6 @@
 
 #include "philo.h"
 
-//static int	is_alive(t_philo *philo);
-
 void	*monitor_status(void *arg)
 {
 	int		i;
@@ -25,32 +23,27 @@ void	*monitor_status(void *arg)
 		i = 0;
 		while (i < data->philos_count)
 		{
-			// if (!is_alive(&data->philos[i]))
-			// 	return ;
-			pthread_mutex_lock(&(data->status_mutex[i]));
-			if (current_time() - data->philos[i].last_meal_time
-				> data->time_to_die && data->philos[i].status != EATING)
-				return (printf("%ld %d %s", current_time(), i + 1, DIE));
-			pthread_mutex_unlock(&(data->status_mutex[i]));
+			if (!still_alive(&data->philos[i]))
+			 	return (0);
 			i++;
 		}
-		if (data->philos_count == 0)
-			return ;
-		usleep(5000); // To avoid too frequent loop
+		if (data->philos_count == 0) // if everyone finished to eat all meals
+			return (0);
+		usleep(100); // To avoid too frequent loop
 	}
+	return (0);
 }
 
-// static int	is_alive(t_philo *philo)
-// {
-// 	if (current_time() - philo->last_meal_time > philo->data->time_to_die)
-// 	{
-// 		pthread_mutex_lock(&(philo->status_mutex));
-// 		if (philo->status != EATING)
-// 		{
-// 			printf("%ld %d %s", current_time(), philo->id, DIE);
-// 			return (0);
-// 		}
-// 		pthread_mutex_unlock(&(philo->status_mutex));
-// 	}
-// 	return (1);
-// }
+int	still_alive(t_philo *philo)
+{
+	pthread_mutex_lock(philo->state_mutex);
+	if ((current_time() - philo->last_meal_time > philo->data->time_to_die
+			&& philo->state != EATING) || philo->state == DEAD)
+ 	{
+ 		printf("%ld %d %s", current_time(), philo->id, DIE);
+		philo->data->end = 1;
+ 		return (0);
+ 	}
+	pthread_mutex_unlock(philo->state_mutex);
+ 	return (1);
+}

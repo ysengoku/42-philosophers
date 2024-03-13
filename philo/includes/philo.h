@@ -38,12 +38,12 @@ typedef struct s_philo
 	int				is_running;
 	t_data			*data;
 	int				id;
-	int				status;
+	int				state;
 	long			last_meal_time;
 	int				meals_count;
 	pthread_mutex_t	*fork_r;
 	pthread_mutex_t	*fork_l;
-	pthread_mutex_t	*status_mutex;
+	pthread_mutex_t	*state_mutex;
 }				t_philo;
 
 typedef struct s_data
@@ -53,14 +53,15 @@ typedef struct s_data
 	int				time_to_eat; // millisecond : 1 millisecond == 1000 microseconds
 	int				time_to_sleep; // millisecond
 	int				meals_to_eat; // -1 if it's not given in arguments
+	int				end;
 	t_philo			*philos;
 	pthread_mutex_t	*forks;
-	pthread_mutex_t	*status_mutex;
+	pthread_mutex_t	*state_mutex;
 	pthread_t		tid;
 }				t_data;
 
 /*----- data init & clear ----------------------------------------------------*/
-int		check_arg(char **argv, t_data *data);
+int		check_arg(int argc, char **argv, t_data *data);
 int		init_mutex(t_data *data);
 int		init_philos(t_data *data);
 void	clear_mutex(t_data *data);
@@ -71,11 +72,12 @@ void	ft_free(t_data *data);
 int		start_routine(t_data *data);
 void	*routine(void *arg);
 void	*monitor_status(void *arg);
+int		still_alive(t_philo *philo);
 
 /*----- utils ----------------------------------------------------------------*/
 size_t	ft_strlen(char *str);
 long	current_time(void);
-void	update_status(t_philo *philo, int new_status);
+void	update_state(t_philo *philo, int new_state);
 
 /*----- error handling  ------------------------------------------------------*/
 int		ft_error(char *message);

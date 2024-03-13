@@ -19,7 +19,7 @@ int	main(int argc, char **argv)
 	if (argc < 5 || argc > 6)
 		return (ft_error(INVALID_ARGC));
 /*--- Check argc & argv ---*/
-	if (check_arg(argv, &data) == 1)
+	if (check_arg(argc, argv, &data) == 1)
 		return (1);
 	if (data.philos_count == 1) // He can never eat
 	{
@@ -29,6 +29,8 @@ int	main(int argc, char **argv)
 	}
 /*--- Init data ---*/
 	if (init_mutex(&data) == 1)
+		return (1);
+	if (init_philos(&data) == 1)
 		return (1);
 /*--- Start therads ---*/
 	if (start_routine(&data) == 1)
