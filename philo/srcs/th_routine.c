@@ -48,11 +48,12 @@ void	*routine(void *arg)
 	philo = (t_philo *)arg;
 	if (philo->is_running)
 	{
-		while (!philo->data->end)
+		while (!philo->data->end) // --> need to check if this condition works
 		{
 			if (!still_alive(philo))
 			{
 				update_state(philo, DEAD);
+				philo->data->end = 1;
 				return (0);
 			}
 			if (wait_forks(philo) == 0)
