@@ -6,7 +6,7 @@
 #    By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 08:36:17 by yusengok          #+#    #+#              #
-#    Updated: 2024/03/12 14:40:14 by yusengok         ###   ########.fr        #
+#    Updated: 2024/03/13 11:30:20 by yusengok         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,11 @@ NAME = philo
 INCLUDE = includes/
 
 FILES = main	\
-		parsing	\
+		data_check	\
 		data_init	\
 		data_clear	\
-		routine	\
-		monitor	\
+		th_routine	\
+		th_monitor	\
 		utils	\
 		error_handling
 

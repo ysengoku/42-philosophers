@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   data_check.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 10:59:29 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/08 11:45:43 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/13 11:37:24 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,9 @@ static int	get_args(char **argv, t_data *data)
 		if (data->meals_to_eat == -1)
 			return (1);
 	}
+	else
+		data->meals_to_eat = -1;
+	data->finished_philos = 0;
 	return (0);
 }
 
