@@ -23,13 +23,13 @@ void	*monitor_status(void *arg)
 		i = 0;
 		while (i < data->philos_count)
 		{
-			if (!still_alive(&data->philos[i]))
+			if (!still_alive(&data->philos[i])) //--> death state check? reporting & philos' thread join befoer return here ?
 			 	return (0);
 			i++;
 		}
 		if (data->philos_count == 0) // if everyone finished to eat all meals
 			return (0);
-		usleep(100); // To avoid too frequent loop
+		usleep(100); // To avoid too frequentloop
 	}
 	return (0);
 }
