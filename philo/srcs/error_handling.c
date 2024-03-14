@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 10:32:11 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/13 15:04:52 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/14 14:32:58 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	ft_error_free(char *message, t_data *data)
 {
 	if (data->forks)
 		free(data->forks);
-	if (data->state_mutex)
-		free(data->state_mutex);
+	if (data->philo_state_mutex)
+		free(data->philo_state_mutex);
 	if (data->philos)
 		free(data->philos);
 	printf(RED "[Error] " RESET);
@@ -40,13 +40,13 @@ int	ft_error_clear_mutex(char *message, t_data *data)
 	while (i < data->philos_count)
 	{
 		pthread_mutex_destroy(&(data->forks[i]));
-		pthread_mutex_destroy(&(data->state_mutex[i]));
+		pthread_mutex_destroy(&(data->philo_state_mutex[i]));
 		i++;
 	}
 	if (data->forks)
 		free(data->forks);
-	if (data->state_mutex)
-		free(data->state_mutex);
+	if (data->philo_state_mutex)
+		free(data->philo_state_mutex);
 	if (data->philos)
 		free(data->philos);
 	printf(RED "[Error] " RESET);
