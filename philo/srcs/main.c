@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 08:56:06 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/13 15:05:28 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/14 09:26:03 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int argc, char **argv)
 	if (data.philos_count == 1) // He can never eat
 	{
 		usleep(data.time_to_die * 1000);
-		printf("%ld %d %s", current_time(), data.philos[0].id, DIE);
+		printf(RED "%ld %d %s" RESET, current_time(), 1, DIE);
 		return (0);
 	}
 /*--- Init data ---*/

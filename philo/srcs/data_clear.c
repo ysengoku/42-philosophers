@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:44:38 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/13 15:05:05 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/14 10:05:17 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	clear_mutex(t_data *data)
 		pthread_mutex_destroy(&(data->state_mutex[i]));
 		i++;
 	}
+	pthread_mutex_destroy(&data->main_state);
 	if (data->forks)
 		free(data->forks);
 	if (data->state_mutex)
