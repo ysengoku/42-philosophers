@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:18:48 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/13 14:30:25 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/14 10:05:13 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	init_mutex(t_data *data)
 	data->state_mutex = malloc(data->philos_count * sizeof(pthread_mutex_t));
 	if (!data->forks || !data->state_mutex)
 		return (ft_error_free(MALLOC_FAILED, data));
+	if (pthread_mutex_init(&data->main_state, NULL) != 0)
+		return (ft_error_free(MUTEX_INIT_FAILED, data));
 	while (i < data->philos_count)
 	{
 		if (pthread_mutex_init(&(data->forks[i]), NULL) != 0
