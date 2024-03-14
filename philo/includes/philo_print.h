@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 09:30:20 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/13 13:10:09 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/14 08:35:41 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@
 # define RESET "\033[0m"
 
 /*----- state messages -------------------------------------------------------*/
-# define TAKE_FORK " has taken a fork\n"
-# define EAT " is eating\n"
-# define SLEEP " is sleeping\n"
-# define THINK " is thinking\n"
-# define DIE " died\n"
+# define TAKE_FORK "has taken a fork\n"
+# define EAT "is eating\n"
+# define SLEEP "is sleeping\n"
+# define THINK "is thinking\n"
+# define DIE "died\n"
 
 /*----- error messages -------------------------------------------------------*/
 # define INVALID_ARGC "Invalid number of arguments.\n\

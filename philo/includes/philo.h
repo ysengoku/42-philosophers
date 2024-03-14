@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 08:37:30 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/13 15:05:14 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/14 13:00:12 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_philo
 
 typedef struct s_data
 {
+	pthread_t		tid;
 	int				philos_count;
 	int				time_to_die; // millisecond
 	int				time_to_eat; // millisecond : 1 millisecond == 1000 microseconds
@@ -57,7 +58,7 @@ typedef struct s_data
 	t_philo			*philos;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	*state_mutex;
-	pthread_t		tid;
+	pthread_mutex_t	main_state;
 }				t_data;
 
 /*----- data init & clear ----------------------------------------------------*/
@@ -68,16 +69,19 @@ void	clear_mutex(t_data *data);
 // int		clear_thread(t_data *data);
 void	ft_free(t_data *data);
 
-/*----- routine --------------------------------------------------------------*/
+/*----- routine & monitor ----------------------------------------------------*/
 int		start_routine(t_data *data);
 void	*routine(void *arg);
-void	*monitor_status(void *arg);
+void	*state_monitor(void *arg);
 int		still_alive(t_philo *philo);
+int		is_end(t_data *data);
 
 /*----- utils ----------------------------------------------------------------*/
 size_t	ft_strlen(char *str);
 long	current_time(void);
-void	update_state(t_philo *philo, int new_state);
+void	print_state(t_philo *philo, char *message);
+int		update_state(t_philo *philo, int new_state);
+int		check_state(t_philo *philo, int state);
 
 /*----- error handling  ------------------------------------------------------*/
 int		ft_error(char *message);
