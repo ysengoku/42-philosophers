@@ -17,9 +17,12 @@ int	start_routine(t_data *data)
 	int	i;
 
 	i = 0;
+	data->start_time = current_time();
 	while (i < data->philos_count)
 	{
-		data->philos[i].last_meal_time = current_time();
+		data->philos[i].last_meal_time = data->start_time;
+		data->philos[i].end_of_life = data->philos[i].last_meal_time
+			+ data->time_to_die; 
 		if (pthread_create(&(data->philos[i].tid), NULL, routine,
 				(void *)&data->philos[i]) != 0)
 			return (handle_thread_error(data, i));
@@ -53,11 +56,6 @@ void	*routine(void *arg)
 				eat(philo);
 				if (finished_meals(philo) == 1)
 					return (0);
-				// if (philo->meals_count == philo->data->meals_to_eat)
-				// {
-				// 	philo->data->philos_count--;
-				// 	return (0);
-				// }
 				if (sleep_then_think(philo) == 1)
 					return (0);
 			}

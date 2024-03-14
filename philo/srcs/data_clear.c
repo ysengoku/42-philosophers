@@ -16,8 +16,8 @@ void	ft_free(t_data *data)
 {
 	if (data->forks)
 		free(data->forks);
-	if (data->philo_state_mutex)
-		free(data->philo_state_mutex);
+	if (data->philo_mutex)
+		free(data->philo_mutex);
 	if (data->philos)
 		free(data->philos);
 }
@@ -30,14 +30,14 @@ void	clear_mutex(t_data *data)
 	while (i < data->philos_count)
 	{
 		pthread_mutex_destroy(&(data->forks[i]));
-		pthread_mutex_destroy(&(data->philo_state_mutex[i]));
+		pthread_mutex_destroy(&(data->philo_mutex[i]));
 		i++;
 	}
 	pthread_mutex_destroy(&data->data_mutex);
 	if (data->forks)
 		free(data->forks);
-	if (data->philo_state_mutex)
-		free(data->philo_state_mutex);
+	if (data->philo_mutex)
+		free(data->philo_mutex);
 	if (data->philos)
 		free(data->philos);
 }

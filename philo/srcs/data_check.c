@@ -64,6 +64,7 @@ static int	get_args(int argc, char **argv, t_data *data)
 	}
 	else
 		data->meals_to_eat = -1;
+	data->finished_philos = 0;
 	data->end = 0;
 	return (0);
 }

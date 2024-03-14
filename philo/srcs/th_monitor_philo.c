@@ -14,58 +14,53 @@
 
 int	still_alive(t_philo *philo)
 {
-	pthread_mutex_lock(philo->philo_state_mutex);
-	if ((current_time() - philo->last_meal_time
-			> philo->data->time_to_die && philo->state != EATING))
+	pthread_mutex_lock(philo->philo_mutex);
+	if ((current_time() > philo->end_of_life && philo->state != EATING))
  	{
 		pthread_mutex_lock(&philo->data->data_mutex);
+		printf(RED "%06ld %d %s" RESET, timestamp(philo->data), philo->id, DIE);
 		philo->data->end = 1;
-		pthread_mutex_unlock(&philo->data->data_mutex);
 		philo->state = DEAD;
 		pthread_mutex_unlock(&philo->data->data_mutex);
-		pthread_mutex_unlock(philo->philo_state_mutex);
-		usleep(1000); ///// -----> Need to check
-		print_state(philo, DIE);
+		pthread_mutex_unlock(philo->philo_mutex);
  		return (0);
  	}
-	pthread_mutex_unlock(philo->philo_state_mutex);
+	pthread_mutex_unlock(philo->philo_mutex);
  	return (1);
 }
 
 int	update_state(t_philo *philo, int new_state)
 {
-	pthread_mutex_lock(philo->philo_state_mutex);
+	pthread_mutex_lock(philo->philo_mutex);
 	philo->state = new_state;
-	pthread_mutex_unlock(philo->philo_state_mutex);
+	pthread_mutex_unlock(philo->philo_mutex);
 	return (0);
 }
 
 int	check_state(t_philo *philo, int state)
 {
-	pthread_mutex_lock(philo->philo_state_mutex);
+	pthread_mutex_lock(philo->philo_mutex);
 	if (philo->state == state)
 	{
-		pthread_mutex_unlock(philo->philo_state_mutex);
+		pthread_mutex_unlock(philo->philo_mutex);
 		return (1);
 	}
-	pthread_mutex_unlock(philo->philo_state_mutex);
+	pthread_mutex_unlock(philo->philo_mutex);
 	return (0);
 }
 
 int	finished_meals(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data->data_mutex);
-	pthread_mutex_lock(philo->philo_state_mutex);
+	pthread_mutex_lock(philo->philo_mutex);
 	if (philo->meals_count == philo->data->meals_to_eat)
 	{
-		philo->data->philos_count--;
+		philo->data->finished_philos++;
 		pthread_mutex_unlock(&philo->data->data_mutex);
-		pthread_mutex_unlock(philo->philo_state_mutex);
+		pthread_mutex_unlock(philo->philo_mutex);
 		return (1);
 	}
 	pthread_mutex_unlock(&philo->data->data_mutex);
-	pthread_mutex_unlock(philo->philo_state_mutex);
+	pthread_mutex_unlock(philo->philo_mutex);
 	return (0);
 }
-
-

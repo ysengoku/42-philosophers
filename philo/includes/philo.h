@@ -40,10 +40,11 @@ typedef struct s_philo
 	int				id;
 	int				state;
 	long			last_meal_time;
+	long			end_of_life;
 	int				meals_count;
 	pthread_mutex_t	*fork_r;
 	pthread_mutex_t	*fork_l;
-	pthread_mutex_t	*philo_state_mutex;
+	pthread_mutex_t	*philo_mutex;
 }				t_philo;
 
 typedef struct s_data
@@ -53,11 +54,13 @@ typedef struct s_data
 	int				time_to_die; // millisecond
 	int				time_to_eat; // millisecond : 1 millisecond == 1000 microseconds
 	int				time_to_sleep; // millisecond
-	int				meals_to_eat; // -1 if it's not given in arguments
+	int				meals_to_eat;
+	long			start_time;
+	int				finished_philos;
 	int				end;
 	t_philo			*philos;
 	pthread_mutex_t	*forks;
-	pthread_mutex_t	*philo_state_mutex;
+	pthread_mutex_t	*philo_mutex;
 	pthread_mutex_t	data_mutex;
 }				t_data;
 
@@ -84,6 +87,7 @@ void	print_state(t_philo *philo, char *message);
 size_t	ft_strlen(char *str);
 int		ft_strcmp(char *s1, char *s2);
 long	current_time(void);
+long	timestamp(t_data *data);
 int		update_state(t_philo *philo, int new_state);
 int		check_state(t_philo *philo, int state);
 int		all_philos_finished(t_data *data);

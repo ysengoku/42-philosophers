@@ -43,3 +43,8 @@ long	current_time(void)
 	gettimeofday(&now, NULL);
 	return (now.tv_sec * 1000 + now.tv_usec / 1000);
 }
+
+long	timestamp(t_data *data)
+{
+	return (current_time() - data->start_time);
+}
