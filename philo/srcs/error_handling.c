@@ -23,8 +23,8 @@ int	ft_error_free(char *message, t_data *data)
 {
 	if (data->forks)
 		free(data->forks);
-	if (data->philo_state_mutex)
-		free(data->philo_state_mutex);
+	if (data->philo_mutex)
+		free(data->philo_mutex);
 	if (data->philos)
 		free(data->philos);
 	printf(RED "[Error] " RESET);
@@ -40,13 +40,13 @@ int	ft_error_clear_mutex(char *message, t_data *data)
 	while (i < data->philos_count)
 	{
 		pthread_mutex_destroy(&(data->forks[i]));
-		pthread_mutex_destroy(&(data->philo_state_mutex[i]));
+		pthread_mutex_destroy(&(data->philo_mutex[i]));
 		i++;
 	}
 	if (data->forks)
 		free(data->forks);
-	if (data->philo_state_mutex)
-		free(data->philo_state_mutex);
+	if (data->philo_mutex)
+		free(data->philo_mutex);
 	if (data->philos)
 		free(data->philos);
 	printf(RED "[Error] " RESET);

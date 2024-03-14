@@ -18,7 +18,6 @@ int	wait_forks(t_philo *philo)
 		pthread_mutex_lock(philo->fork_r);
 	else
 		pthread_mutex_lock(philo->fork_l);
-	print_state(philo, TAKE_FORK);
 	if (check_state(philo, DEAD) == 1 || is_end(philo->data))
 	{
 		if (philo->id % 2 == 0)
@@ -27,27 +26,19 @@ int	wait_forks(t_philo *philo)
 			pthread_mutex_unlock(philo->fork_l);
 		return (-1);
 	}
+	print_state(philo, TAKE_FORK);
 	if (philo->id % 2 == 0)
 		pthread_mutex_lock(philo->fork_l);
 	else
 		pthread_mutex_lock(philo->fork_r);
-		
-	// if (philo->id % 2 == 0)
-	// {
-	// 	if (pthread_mutex_lock(philo->fork_l) != 0)
-	// 	{
-	// 		pthread_mutex_unlock(philo->fork_r);
-	// 		return (1);
-	// 	}
-	// }
-	// else
-	// {
-	// 	if (pthread_mutex_lock(philo->fork_r) != 0)
-	// 	{
-	// 		pthread_mutex_unlock(philo->fork_l);
-	// 		return (1);
-	// 	}
-	// }
+	if (check_state(philo, DEAD) == 1 || is_end(philo->data))
+	{
+		if (philo->id % 2 == 0)
+			pthread_mutex_unlock(philo->fork_r);
+		else
+			pthread_mutex_unlock(philo->fork_l);
+		return (-1);
+	}
 	print_state(philo, TAKE_FORK);
 	return (0);
 }
@@ -59,10 +50,11 @@ void	eat(t_philo *philo)
 	usleep(philo->data->time_to_eat * 1000);
 	pthread_mutex_unlock(philo->fork_r);
 	pthread_mutex_unlock(philo->fork_l);
-	pthread_mutex_lock(philo->philo_state_mutex); ///
+	pthread_mutex_lock(philo->philo_mutex); ///
 	philo->last_meal_time = current_time();
+	philo->end_of_life = philo->last_meal_time + philo->data->time_to_die;
 	philo->meals_count++;
-	pthread_mutex_unlock(philo->philo_state_mutex); ///
+	pthread_mutex_unlock(philo->philo_mutex); ///
 }
 
 int	sleep_then_think(t_philo *philo)
@@ -83,8 +75,10 @@ void	print_state(t_philo *philo, char *message)
 {
 	pthread_mutex_lock(&philo->data->data_mutex);
 	if (ft_strcmp(message, DIE) == 0)
-		printf(RED "%ld %d %s" RESET, current_time(), philo->id, message);
+		printf(RED "%06ld %d %s" RESET, timestamp(philo->data), philo->id, message);
+	else if (ft_strcmp(message, EAT) == 0)
+		printf(GREEN "%06ld %d %s" RESET, timestamp(philo->data), philo->id, message);
 	else
-		printf("%ld %d %s", current_time(), philo->id, message);
+		printf("%06ld %d %s", timestamp(philo->data), philo->id, message);
 	pthread_mutex_unlock(&philo->data->data_mutex);
 }
