@@ -1,45 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_monitoir.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/08 08:54:29 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/14 14:48:07 by yusengok         ###   ########.fr       */
+/*   Created: 2024/03/14 14:47:40 by yusengok          #+#    #+#             */
+/*   Updated: 2024/03/14 15:00:06 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-size_t	ft_strlen(char *str)
+int	is_end(t_data *data)
 {
-	size_t	len;
-
-	len = 0;
-	while (str[len])
-		len++;
-	return (len);
-}
-
-int	ft_strcmp(char *s1, char *s2)
-{
-	int	i;
-
-	i = 0;
-	while (s1[i] && s2[i])
+	pthread_mutex_lock(&data->data_mutex);
+	if (data->end)
 	{
-		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
-		i++;
+		pthread_mutex_unlock(&data->data_mutex);
+		return (1);
 	}
+	pthread_mutex_unlock(&data->data_mutex);
 	return (0);
 }
 
-long	current_time(void)
+int	all_philos_finished(t_data *data)
 {
-	struct timeval	now;
-
-	gettimeofday(&now, NULL);
-	return (now.tv_sec * 1000 + now.tv_usec / 1000);
+	pthread_mutex_lock(&data->data_mutex);
+	if (data->philos_count == 0)
+	{	
+		data->end = 1;
+		pthread_mutex_unlock(&data->data_mutex);
+		return (1);
+	}
+	pthread_mutex_unlock(&data->data_mutex);
+	return (0);
 }

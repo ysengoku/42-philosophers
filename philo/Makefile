@@ -6,7 +6,7 @@
 #    By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 08:36:17 by yusengok          #+#    #+#              #
-#    Updated: 2024/03/13 11:30:20 by yusengok         ###   ########.fr        #
+#    Updated: 2024/03/14 15:03:45 by yusengok         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +22,10 @@ FILES = main	\
 		data_check	\
 		data_init	\
 		data_clear	\
+		threads	\
 		th_routine	\
-		th_monitor	\
+		th_monitor_philo	\
+		th_monitoir_data	\
 		utils	\
 		error_handling
 
