@@ -12,6 +12,8 @@
 
 #include "philo.h"
 
+static int	release_fork(t_philo *philo);
+
 int	wait_forks(t_philo *philo)
 {
 	if (philo->id % 2 == 0)
@@ -19,6 +21,8 @@ int	wait_forks(t_philo *philo)
 	else
 		pthread_mutex_lock(philo->fork_l);
 	if (check_state(philo, DEAD) == 1 || is_end(philo->data))
+		return(release_fork(philo));
+	/*
 	{
 		if (philo->id % 2 == 0)
 			pthread_mutex_unlock(philo->fork_r);
@@ -26,12 +30,15 @@ int	wait_forks(t_philo *philo)
 			pthread_mutex_unlock(philo->fork_l);
 		return (-1);
 	}
+	*/
 	print_state(philo, TAKE_FORK);
 	if (philo->id % 2 == 0)
 		pthread_mutex_lock(philo->fork_l);
 	else
 		pthread_mutex_lock(philo->fork_r);
 	if (check_state(philo, DEAD) == 1 || is_end(philo->data))
+		return(release_fork(philo));
+	/*
 	{
 		if (philo->id % 2 == 0)
 			pthread_mutex_unlock(philo->fork_r);
@@ -39,8 +46,18 @@ int	wait_forks(t_philo *philo)
 			pthread_mutex_unlock(philo->fork_l);
 		return (-1);
 	}
+	*/
 	print_state(philo, TAKE_FORK);
 	return (0);
+}
+
+static int	release_fork(t_philo *philo)
+{
+	if (philo->id % 2 == 0)
+		pthread_mutex_unlock(philo->fork_r);
+	else
+		pthread_mutex_unlock(philo->fork_l);
+	return (-1);
 }
 
 void	eat(t_philo *philo)
@@ -50,11 +67,11 @@ void	eat(t_philo *philo)
 	usleep(philo->data->time_to_eat * 1000);
 	pthread_mutex_unlock(philo->fork_r);
 	pthread_mutex_unlock(philo->fork_l);
-	pthread_mutex_lock(philo->philo_mutex); ///
+	pthread_mutex_lock(philo->philo_mutex);
 	philo->last_meal_time = current_time();
 	philo->end_of_life = philo->last_meal_time + philo->data->time_to_die;
 	philo->meals_count++;
-	pthread_mutex_unlock(philo->philo_mutex); ///
+	pthread_mutex_unlock(philo->philo_mutex);
 }
 
 int	sleep_then_think(t_philo *philo)
