@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:18:48 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/15 14:48:34 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/15 15:13:29 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	init_philos(t_data *data)
 		data->philos[i].fork_r = &(data->forks[i]);
 		data->philos[i].fork_l = &(data->forks[(i + 1) % data->philos_count]);
 		data->philos[i].philo_mutex = &(data->philo_mutex[i]);
-		data->philos[i].is_running = 1; 
+		data->philos[i].is_running = 1;
 		i++;
 	}
 	return (0);
