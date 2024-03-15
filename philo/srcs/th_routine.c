@@ -6,13 +6,13 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 13:30:46 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/14 14:54:16 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/15 10:19:41 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int	release_fork(t_philo *philo);
+static int	release_1stfork(t_philo *philo);
 
 int	wait_forks(t_philo *philo)
 {
@@ -21,37 +21,25 @@ int	wait_forks(t_philo *philo)
 	else
 		pthread_mutex_lock(philo->fork_l);
 	if (check_state(philo, DEAD) == 1 || is_end(philo->data))
-		return(release_fork(philo));
-	/*
-	{
-		if (philo->id % 2 == 0)
-			pthread_mutex_unlock(philo->fork_r);
-		else
-			pthread_mutex_unlock(philo->fork_l);
-		return (-1);
-	}
-	*/
+		return(release_1stfork(philo));
 	print_state(philo, TAKE_FORK);
 	if (philo->id % 2 == 0)
 		pthread_mutex_lock(philo->fork_l);
 	else
 		pthread_mutex_lock(philo->fork_r);
 	if (check_state(philo, DEAD) == 1 || is_end(philo->data))
-		return(release_fork(philo));
-	/*
 	{
 		if (philo->id % 2 == 0)
-			pthread_mutex_unlock(philo->fork_r);
+		pthread_mutex_unlock(philo->fork_l);
 		else
-			pthread_mutex_unlock(philo->fork_l);
-		return (-1);
+		pthread_mutex_unlock(philo->fork_r);
+		return(release_1stfork(philo));
 	}
-	*/
 	print_state(philo, TAKE_FORK);
 	return (0);
 }
 
-static int	release_fork(t_philo *philo)
+static int	release_1stfork(t_philo *philo)
 {
 	if (philo->id % 2 == 0)
 		pthread_mutex_unlock(philo->fork_r);
@@ -90,12 +78,18 @@ int	sleep_then_think(t_philo *philo)
 
 void	print_state(t_philo *philo, char *message)
 {
-	pthread_mutex_lock(&philo->data->data_mutex);
 	if (ft_strcmp(message, DIE) == 0)
+	{
 		printf(RED "%06ld %d %s" RESET, timestamp(philo->data), philo->id, message);
-	else if (ft_strcmp(message, EAT) == 0)
-		printf(GREEN "%06ld %d %s" RESET, timestamp(philo->data), philo->id, message);
+		printf("\n-----👻 👻 👻\n\n");
+	}
 	else
-		printf("%06ld %d %s", timestamp(philo->data), philo->id, message);
-	pthread_mutex_unlock(&philo->data->data_mutex);
+	{
+		pthread_mutex_lock(&philo->data->data_mutex);
+		if (ft_strcmp(message, EAT) == 0)
+			printf(GREEN "%06ld %d %s" RESET, timestamp(philo->data), philo->id, message);
+		else
+			printf("%06ld %d %s", timestamp(philo->data), philo->id, message);
+		pthread_mutex_unlock(&philo->data->data_mutex);
+	}
 }

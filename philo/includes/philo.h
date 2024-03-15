@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 08:37:30 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/14 14:50:16 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/15 08:47:40 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int		check_arg(int argc, char **argv, t_data *data);
 int		init_mutex(t_data *data);
 int		init_philos(t_data *data);
 void	clear_mutex(t_data *data);
-// int		clear_thread(t_data *data);
 void	ft_free(t_data *data);
 
 /*----- routine & monitor ----------------------------------------------------*/
