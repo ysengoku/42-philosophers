@@ -63,5 +63,10 @@ int main(void)
   return (0);
 }
 ```
+## References
+### Testers
+* [Philosophers visualizer](https://nafuka11.github.io/philosophers-visualizer/)  
+* [socrates](https://github.com/nesvoboda/socrates)  
+* [LazyPhilosophersTester](https://github.com/MichelleJiam/LazyPhilosophersTester)  
 
  
