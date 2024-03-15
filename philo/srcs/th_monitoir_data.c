@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_monitoir.c                                   :+:      :+:    :+:   */
+/*   th_monitoir_data.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 14:47:40 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/14 15:00:06 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/15 10:36:56 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	all_philos_finished(t_data *data)
 {
 	pthread_mutex_lock(&data->data_mutex);
 	if (data->finished_philos == data->philos_count && data->meals_to_eat != -1)
-	{	
+	{
 		data->end = 1;
 		pthread_mutex_unlock(&data->data_mutex);
 		return (1);

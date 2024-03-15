@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 14:42:49 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/15 10:26:00 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/15 10:39:29 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	start_routine(t_data *data)
 	{
 		data->philos[i].last_meal_time = data->start_time;
 		data->philos[i].end_of_life = data->philos[i].last_meal_time
-			+ data->time_to_die; 
+			+ data->time_to_die;
 		if (pthread_create(&(data->philos[i].tid), NULL, routine,
 				(void *)&data->philos[i]) != 0)
 			return (handle_thread_error(data, i));
@@ -76,7 +76,7 @@ void	*state_monitor(void *arg)
 		while (i < data->philos_count)
 		{
 			if (!still_alive(&data->philos[i]))
-			 	return (0);
+				return (0);
 			i++;
 		}
 		if (all_philos_finished(data) == 1)
