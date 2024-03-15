@@ -6,13 +6,13 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 13:30:46 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/15 10:38:54 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/15 14:23:38 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int	release_1stfork(t_philo *philo);
+static int	release_forks(t_philo *philo, int fork_count);
 
 int	wait_forks(t_philo *philo)
 {
@@ -21,31 +21,32 @@ int	wait_forks(t_philo *philo)
 	else
 		pthread_mutex_lock(philo->fork_l);
 	if (check_state(philo, DEAD) == 1 || is_end(philo->data))
-		return (release_1stfork(philo));
+		return (release_forks(philo, 1));
 	print_state(philo, TAKE_FORK);
 	if (philo->id % 2 == 0)
 		pthread_mutex_lock(philo->fork_l);
 	else
 		pthread_mutex_lock(philo->fork_r);
 	if (check_state(philo, DEAD) == 1 || is_end(philo->data))
-	{
-		if (philo->id % 2 == 0)
-			pthread_mutex_unlock(philo->fork_l);
-		else
-			pthread_mutex_unlock(philo->fork_r);
-		return (release_1stfork(philo));
-	}
+		return (release_forks(philo, 2));
 	print_state(philo, TAKE_FORK);
 	return (0);
 }
 
-static int	release_1stfork(t_philo *philo)
+static int	release_forks(t_philo *philo, int fork_count)
 {
 	if (philo->id % 2 == 0)
 		pthread_mutex_unlock(philo->fork_r);
 	else
 		pthread_mutex_unlock(philo->fork_l);
-	return (-1);
+	if (fork_count == 2)
+	{
+		if (philo->id % 2 == 0)
+			pthread_mutex_unlock(philo->fork_l);
+		else
+			pthread_mutex_unlock(philo->fork_r);
+	}
+	return (1);
 }
 
 void	eat(t_philo *philo)

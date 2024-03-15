@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 14:08:59 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/15 10:42:24 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/15 14:24:24 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	check_state(t_philo *philo, int state)
 	return (0);
 }
 
-int	finished_meals(t_philo *philo)
+int	finished_all_meals(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data->data_mutex);
 	pthread_mutex_lock(philo->philo_mutex);
