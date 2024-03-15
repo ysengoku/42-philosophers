@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:44:38 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/14 14:32:58 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/15 09:28:55 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,3 @@ void	clear_mutex(t_data *data)
 	if (data->philos)
 		free(data->philos);
 }
-
-// int	clear_thread(t_data *data)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (i < data->philos_count)
-// 	{
-// 		pthread_join(data->philos[i].tid, NULL);
-// 		i++;
-// 	}
-// 	free(data->philos);
-// }

@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 14:42:49 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/14 15:18:20 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/15 10:26:00 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	*state_monitor(void *arg)
 		}
 		if (all_philos_finished(data) == 1)
 			return (0);
-		usleep(100); /*To avoid too frequent loop*/
+		usleep(500); /*To avoid too frequent loop*/
 	}
 	return (0);
 }

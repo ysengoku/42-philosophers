@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 14:08:59 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/15 08:18:25 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/15 10:18:52 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int	still_alive(t_philo *philo)
 		philo->state = DEAD;
 		pthread_mutex_unlock(philo->philo_mutex);
 		pthread_mutex_lock(&philo->data->data_mutex);
-		printf(RED "%06ld %d %s" RESET, timestamp(philo->data), philo->id, DIE);
+		print_state(philo, DIE);
+		// printf(RED "%06ld %d %s" RESET, timestamp(philo->data), philo->id, DIE);
 		philo->data->end = 1;
 		pthread_mutex_unlock(&philo->data->data_mutex);
 
@@ -56,9 +57,9 @@ int	finished_meals(t_philo *philo)
 	pthread_mutex_lock(philo->philo_mutex);
 	if (philo->meals_count == philo->data->meals_to_eat)
 	{
+		pthread_mutex_unlock(philo->philo_mutex);
 		philo->data->finished_philos++;
 		pthread_mutex_unlock(&philo->data->data_mutex);
-		pthread_mutex_unlock(philo->philo_mutex);
 		return (1);
 	}
 	pthread_mutex_unlock(&philo->data->data_mutex);
