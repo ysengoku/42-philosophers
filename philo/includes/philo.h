@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 08:37:30 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/15 08:47:40 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/15 14:24:24 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ long	timestamp(t_data *data);
 int		update_state(t_philo *philo, int new_state);
 int		check_state(t_philo *philo, int state);
 int		all_philos_finished(t_data *data);
-int		finished_meals(t_philo *philo);
+int		finished_all_meals(t_philo *philo);
 
 /*----- error handling  ------------------------------------------------------*/
 int		ft_error(char *message);

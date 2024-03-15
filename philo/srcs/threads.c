@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 14:42:49 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/15 10:39:29 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/15 14:24:24 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	*routine(void *arg)
 			if (wait_forks(philo) == 0)
 			{
 				eat(philo);
-				if (finished_meals(philo) == 1)
+				if (finished_all_meals(philo) == 1)
 					return (0);
 				if (sleep_then_think(philo) == 1)
 					return (0);

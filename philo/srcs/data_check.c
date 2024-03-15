@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 10:59:29 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/13 14:44:56 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/15 13:54:27 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,27 +45,25 @@ int	check_arg(int argc, char **argv, t_data *data)
 static int	get_args(int argc, char **argv, t_data *data)
 {
 	data->philos_count = ft_atoi_philo(argv[1]);
-	if (data->philos_count == -1)
-		return (1);
 	data->time_to_die = ft_atoi_philo(argv[2]);
-	if (data->time_to_die == -1)
-		return (1);
 	data->time_to_eat = ft_atoi_philo(argv[3]);
-	if (data->time_to_eat == -1)
-		return (1);
 	data->time_to_sleep = ft_atoi_philo(argv[4]);
-	if (data->time_to_sleep == -1)
+	if ((data->philos_count == -1) || (data->time_to_die == -1)
+		|| (data->time_to_eat == -1) || (data->time_to_sleep == -1))
 		return (1);
+	data->meals_to_eat = -1;
 	if (argc == 6)
 	{
 		data->meals_to_eat = ft_atoi_philo(argv[5]);
 		if (data->meals_to_eat == -1)
 			return (1);
 	}
-	else
-		data->meals_to_eat = -1;
+	data->start_time = 0;
 	data->finished_philos = 0;
 	data->end = 0;
+	data->philos = NULL;
+	data->forks = NULL;
+	data->philo_mutex = NULL;
 	return (0);
 }
 
