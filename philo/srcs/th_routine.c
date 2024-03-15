@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 13:30:46 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/15 14:23:38 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/15 15:02:39 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,11 @@ void	print_state(t_philo *philo, char *message)
 {
 	if (ft_strcmp(message, DIE) == 0)
 	{
-		printf(RED "%06ld %d %s" RESET, timestamp(philo->data),
+		// printf(RED "%06ld %d %s" RESET, timestamp(philo->data),
+		// 	philo->id, message);
+		// printf("\n👻👻👻\n\n");
+		printf("%06ld %d %s", timestamp(philo->data),
 			philo->id, message);
-		printf("\n-----👻 👻 👻\n\n");
 	}
 	else
 	{
