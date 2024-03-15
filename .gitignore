@@ -52,5 +52,5 @@ Mkfile.old
 dkms.conf
 
 philo/README.md
-./philo
 philo/philo
+.vscode/launch.json
