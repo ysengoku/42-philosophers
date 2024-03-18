@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 08:54:29 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/15 10:40:38 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/18 10:24:39 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,13 @@ long	timestamp(t_data *data)
 
 	gettimeofday(&now, NULL);
 	return ((now.tv_sec * 1000 + now.tv_usec / 1000) - data->start_time);
+}
+
+void	ft_usleep(long	time_in_ms)
+{
+	long	start_time;
+
+	start_time = current_time();
+	while (current_time() - start_time < time_in_ms)
+		usleep(500);
 }
