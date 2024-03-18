@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 08:54:29 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/18 10:24:39 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/18 10:29:47 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ long	current_time(void)
 	return (now.tv_sec * 1000 + now.tv_usec / 1000);
 }
 
-long	timestamp(t_data *data)
+long	ft_timestamp(t_data *data)
 {
 	struct timeval	now;
 
@@ -52,7 +52,7 @@ long	timestamp(t_data *data)
 	return ((now.tv_sec * 1000 + now.tv_usec / 1000) - data->start_time);
 }
 
-void	ft_usleep(long	time_in_ms)
+void	ft_usleep(long time_in_ms)
 {
 	long	start_time;
 
