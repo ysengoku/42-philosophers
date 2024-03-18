@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 08:37:30 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/15 14:24:24 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/18 10:24:59 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ typedef struct s_data
 {
 	pthread_t		tid;
 	int				philos_count;
-	int				time_to_die; // millisecond
-	int				time_to_eat; // millisecond : 1 millisecond == 1000 microseconds
-	int				time_to_sleep; // millisecond
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
 	int				meals_to_eat;
 	long			start_time;
 	int				finished_philos;
@@ -87,6 +87,7 @@ size_t	ft_strlen(char *str);
 int		ft_strcmp(char *s1, char *s2);
 long	current_time(void);
 long	timestamp(t_data *data);
+void	ft_usleep(long	time_in_ms);
 int		update_state(t_philo *philo, int new_state);
 int		check_state(t_philo *philo, int state);
 int		all_philos_finished(t_data *data);
