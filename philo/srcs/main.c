@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 08:56:06 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/15 13:10:31 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/03/18 10:28:23 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	main(int argc, char **argv)
 	if (data.philos_count == 1)
 	{
 		data.start_time = current_time();
-		usleep(data.time_to_die * 1000);
-		printf(RED "%06ld %d %s" RESET, timestamp(&data), 1, DIE);
+		ft_usleep(data.time_to_die);
+		printf("%06ld %d %s", ft_timestamp(&data), 1, DIE);
 		return (0);
 	}
 	if (init_mutex(&data) == 1)
