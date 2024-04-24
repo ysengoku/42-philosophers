@@ -6,7 +6,7 @@
 #    By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 08:36:17 by yusengok          #+#    #+#              #
-#    Updated: 2024/03/14 15:03:45 by yusengok         ###   ########.fr        #
+#    Updated: 2024/04/24 14:46:17 by yusengok         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,14 +43,14 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -pthread -I$(INCLUDE)
 
 all:
-	$(MAKE) $(NAME)
+	@$(MAKE) $(NAME)
 
 $(NAME): $(OBJS)
 	@printf "$(MAGENTA)$(BOLD)Building philo...\n$(RESET)"
 	$(CC) $(CFLAGS) $^ -o $@
 	@printf "$(LIGHT_GREEN)$(BOLD)philo is ready to launch\n$(RESET)"
 
-$(OBJS_DIR)%.o: %.c $(HEADERS)
+$(OBJS_DIR)%.o: %.c $(HEADERS) Makefile
 	@mkdir -p $(OBJS_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@ -MMD -MP
 
