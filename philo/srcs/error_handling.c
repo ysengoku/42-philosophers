@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 10:32:11 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/14 14:32:58 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/04/24 15:25:40 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 int	ft_error(char *message)
 {
-	printf(RED "[Error] " RESET);
-	printf("%s\n", message);
+	// printf(RED "[Error] " RESET);
+	// printf("%s\n", message);
+	write(2, "[Error] ", 9);
+	write(2, message, ft_strlen(message));
+	write(2, "\n", 1);
 	return (1);
 }
 
@@ -27,8 +30,11 @@ int	ft_error_free(char *message, t_data *data)
 		free(data->philo_mutex);
 	if (data->philos)
 		free(data->philos);
-	printf(RED "[Error] " RESET);
-	printf("%s\n", message);
+	// printf(RED "[Error] " RESET);
+	// printf("%s\n", message);
+	write(2, "[Error] ", 10);
+	write(2, message, ft_strlen(message));
+	write(2, "\n", 1);
 	return (1);
 }
 

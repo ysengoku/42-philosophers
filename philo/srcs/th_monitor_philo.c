@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 14:08:59 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/15 14:24:24 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/04/24 14:43:55 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	still_alive(t_philo *philo)
 	return (1);
 }
 
-int	update_state(t_philo *philo, int new_state)
+int	update_state(t_philo *philo, enum e_state new_state)
 {
 	pthread_mutex_lock(philo->philo_mutex);
 	philo->state = new_state;
@@ -37,7 +37,7 @@ int	update_state(t_philo *philo, int new_state)
 	return (0);
 }
 
-int	check_state(t_philo *philo, int state)
+int	check_state(t_philo *philo, enum e_state state)
 {
 	pthread_mutex_lock(philo->philo_mutex);
 	if (philo->state == state)
