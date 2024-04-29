@@ -28,9 +28,9 @@ int	print_usage(void)
 	write(2, ERR, 12);
 	write(2, RESET, 4);
 	write(2, INVALID_ARGC, ft_strlen(INVALID_ARGC));
-	write (2, USAGE1, 54);
-	write (2, USAGE2, 31);
-	write (2, USAGE3, 48);
+	write(2, "Usage: ./philo (number_of_philosophers) (time_to_die) \
+(time_to_eat) (time_to_sleep) \
+(option: number_of_times_each_philosopher_must_eat)\n", 136);
 	return (1);
 }
 

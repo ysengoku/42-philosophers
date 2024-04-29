@@ -45,7 +45,7 @@ CFLAGS = -Wall -Wextra -Werror -pthread -I$(INCLUDE)
 
 all:
 	@$(MAKE) $(NAME)
-	@printf "$(LIGHT_GREEN)$(BOLD)🤔💭 philo is ready to launch 🍝😋\n$(RESET)"
+	@printf "$(LIGHT_GREEN)$(BOLD)Ready to launch 🤔💭 $(RESET)\n"
 
 $(NAME): $(OBJS)
 	@printf "$(MAGENTA)$(BOLD)Building philo...\n$(RESET)"
