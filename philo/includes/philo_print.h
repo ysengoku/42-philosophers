@@ -29,9 +29,6 @@
 /*----- error messages -------------------------------------------------------*/
 # define ERR "== ERROR == "
 # define INVALID_ARGC "Invalid number of arguments.\n"
-# define USAGE1 "Usage: ./philo (number_of_philosophers) (time_to_die) "
-# define USAGE2 "(time_to_eat) (time_to_sleep) "
-# define USAGE3 "(op: number_of_times_each_philosopher_must_eat)\n"
 # define TOOFEW_PHILO "There must be at least 1 philosopher."
 # define NEGATIVE_NBR "Negative number is not accepted."
 # define INVALID_NBR "Input is not valid number."
