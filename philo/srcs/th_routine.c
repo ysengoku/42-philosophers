@@ -6,49 +6,25 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 13:30:46 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/18 13:46:21 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/04/29 11:49:39 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int	release_forks(t_philo *philo, int fork_count);
-
 int	wait_forks(t_philo *philo)
 {
-	if (philo->id % 2 == 0)
-		pthread_mutex_lock(philo->fork_r);
-	else
-		pthread_mutex_lock(philo->fork_l);
-	usleep(300);
+	take_first_fork(philo);
+	usleep(500);
 	if (check_state(philo, DEAD) == 1 || is_end(philo->data))
 		return (release_forks(philo, 1));
 	print_state(philo, TAKE_FORK);
-	if (philo->id % 2 == 0)
-		pthread_mutex_lock(philo->fork_l);
-	else
-		pthread_mutex_lock(philo->fork_r);
-	usleep(300);
+	take_second_fork(philo);
+	usleep(500);
 	if (check_state(philo, DEAD) == 1 || is_end(philo->data))
 		return (release_forks(philo, 2));
 	print_state(philo, TAKE_FORK);
 	return (0);
-}
-
-static int	release_forks(t_philo *philo, int fork_count)
-{
-	if (philo->id % 2 == 0)
-		pthread_mutex_unlock(philo->fork_r);
-	else
-		pthread_mutex_unlock(philo->fork_l);
-	if (fork_count == 2)
-	{
-		if (philo->id % 2 == 0)
-			pthread_mutex_unlock(philo->fork_l);
-		else
-			pthread_mutex_unlock(philo->fork_r);
-	}
-	return (1);
 }
 
 void	eat(t_philo *philo)
@@ -61,13 +37,12 @@ void	eat(t_philo *philo)
 	update_state(philo, EATING);
 	print_state(philo, EAT);
 	ft_usleep(philo->data->time_to_eat);
-	pthread_mutex_lock(philo->philo_mutex);
+	pthread_mutex_lock(&philo->p_mutex);
 	philo->last_meal_time = current_time();
 	philo->end_of_life = philo->last_meal_time + philo->data->time_to_die;
 	philo->meals_count++;
-	pthread_mutex_unlock(philo->philo_mutex);
-	pthread_mutex_unlock(philo->fork_r);
-	pthread_mutex_unlock(philo->fork_l);
+	pthread_mutex_unlock(&philo->p_mutex);
+	release_forks(philo, 2);
 }
 
 int	sleep_then_think(t_philo *philo)

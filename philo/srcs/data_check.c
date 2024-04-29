@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 10:59:29 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/15 13:54:27 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/04/29 10:36:38 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ static int	get_args(int argc, char **argv, t_data *data)
 	data->end = 0;
 	data->philos = NULL;
 	data->forks = NULL;
-	data->philo_mutex = NULL;
 	return (0);
 }
 

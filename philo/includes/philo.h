@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 08:37:30 by yusengok          #+#    #+#             */
-/*   Updated: 2024/04/29 09:50:22 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/04/29 11:47:40 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ enum e_state
 
 typedef struct s_fork
 {
-	pthread_mutex_t	fork_mutex;
 	int				occupied;
+	pthread_mutex_t	f_mutex;
 }				t_fork;
 
 typedef struct s_philo
@@ -50,11 +50,9 @@ typedef struct s_philo
 	long			last_meal_time;
 	long			end_of_life;
 	int				meals_count;
-	pthread_mutex_t	*fork_r;
-	pthread_mutex_t	*fork_l;
-	// t_fork			*fork_r;
-	// t_fork			*fork_l;
-	pthread_mutex_t	*philo_mutex;
+	t_fork			*fork_r;
+	t_fork			*fork_l;
+	pthread_mutex_t	p_mutex;
 }				t_philo;
 
 typedef struct s_data
@@ -69,16 +67,16 @@ typedef struct s_data
 	int				finished_philos;
 	int				end;
 	t_philo			*philos;
-	pthread_mutex_t	*forks;
-	// t_fork			*forks;
-	pthread_mutex_t	*philo_mutex;
+	// pthread_mutex_t	*philo_mutex;
+	t_fork			*forks;
+	// pthread_mutex_t	*fork_mutex;
 	pthread_mutex_t	data_mutex;
 }				t_data;
 
 /*----- data init & clear ----------------------------------------------------*/
 int		check_arg(int argc, char **argv, t_data *data);
-int		init_mutex(t_data *data);
-int		init_philos(t_data *data);
+int		init_data(t_data *data);
+// int		init_philos(t_data *data);
 void	clear_mutex(t_data *data);
 void	ft_free(t_data *data);
 
@@ -87,6 +85,9 @@ int		start_routine(t_data *data);
 void	*routine(void *arg);
 void	*state_monitor(void *arg);
 int		wait_forks(t_philo *philo);
+void	take_first_fork(t_philo *philo);
+void	take_second_fork(t_philo *philo);
+int		release_forks(t_philo *philo, int fork_count);
 void	eat(t_philo *philo);
 int		sleep_then_think(t_philo *philo);
 int		still_alive(t_philo *philo);

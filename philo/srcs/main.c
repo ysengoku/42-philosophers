@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 08:56:06 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/18 10:28:23 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/04/29 11:38:42 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,11 @@ int	main(int argc, char **argv)
 		printf("%06ld %d %s", ft_timestamp(&data), 1, DIE);
 		return (0);
 	}
-	if (init_mutex(&data) == 1)
-		return (1);
-	if (init_philos(&data) == 1)
+	if (init_data(&data) == 1)
 		return (1);
 	if (start_routine(&data) == 1)
 		return (1);
+	printf(GREEN "%06ld end\n" RESET, ft_timestamp(&data)); ///// For test
 	clear_mutex(&data);
 	return (0);
 }
