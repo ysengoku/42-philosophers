@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 08:37:30 by yusengok          #+#    #+#             */
-/*   Updated: 2024/04/29 11:47:40 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/04/29 14:30:01 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,7 @@ typedef struct s_data
 	int				finished_philos;
 	int				end;
 	t_philo			*philos;
-	// pthread_mutex_t	*philo_mutex;
 	t_fork			*forks;
-	// pthread_mutex_t	*fork_mutex;
 	pthread_mutex_t	data_mutex;
 }				t_data;
 
@@ -107,6 +105,7 @@ int		finished_all_meals(t_philo *philo);
 
 /*----- error handling  ------------------------------------------------------*/
 int		ft_error(char *message);
+int		print_usage(void);
 int		ft_error_free(char *message, t_data *data);
 int		ft_error_clear_mutex(char *message, t_data *data);
 int		handle_thread_error(t_data *data, int i);

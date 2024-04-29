@@ -6,7 +6,7 @@
 #    By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 08:36:17 by yusengok          #+#    #+#              #
-#    Updated: 2024/04/29 11:48:13 by yusengok         ###   ########.fr        #
+#    Updated: 2024/04/29 15:05:48 by yusengok         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ CFLAGS = -Wall -Wextra -Werror -pthread -I$(INCLUDE)
 
 all:
 	@$(MAKE) $(NAME)
-	@printf "$(LIGHT_GREEN)$(BOLD)philo is ready to launch\n$(RESET)"
+	@printf "$(LIGHT_GREEN)$(BOLD)philo is ready to launch 🤔💭\n$(RESET)"
 
 $(NAME): $(OBJS)
 	@printf "$(MAGENTA)$(BOLD)Building philo...\n$(RESET)"
@@ -58,7 +58,7 @@ $(OBJS_DIR)%.o: %.c $(HEADERS) Makefile
 -include $(DEPS)
 
 clean:
-	@printf "$(MAGENTA)$(BOLD)Cleaning...\n$(RESET)"
+	@printf "$(MAGENTA) Cleaning...\n$(RESET)"
 	$(RM) -r $(OBJS_DIR)
 
 fclean: clean

@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 09:30:20 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/14 08:35:41 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/04/29 14:29:33 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,11 @@
 # define DIE "died\n"
 
 /*----- error messages -------------------------------------------------------*/
-# define INVALID_ARGC "Invalid number of arguments.\n\
-Usage: ./philo (number_of_philosophers) (time_to_die) (time_to_eat) \
-(time_to_sleep) (optional: number_of_times_each_philosopher_must_eat)"
+# define ERR "== ERROR == "
+# define INVALID_ARGC "Invalid number of arguments.\n"
+# define USAGE1 "Usage: ./philo (number_of_philosophers) (time_to_die) "
+# define USAGE2 "(time_to_eat) (time_to_sleep) "
+# define USAGE3 "(op: number_of_times_each_philosopher_must_eat)\n"
 # define TOOFEW_PHILO "There must be at least 1 philosopher."
 # define NEGATIVE_NBR "Negative number is not accepted."
 # define INVALID_NBR "Input is not valid number."
