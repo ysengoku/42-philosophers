@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:18:48 by yusengok          #+#    #+#             */
-/*   Updated: 2024/04/29 11:12:00 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/04/29 11:53:55 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static int	init_forks(t_data *data)
 	}
 	while (i < data->philos_count)
 	{
-		
 		if (pthread_mutex_init(&data->forks[i].f_mutex, NULL) != 0)
 		{
 			while (i > 0)
