@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 08:37:30 by yusengok          #+#    #+#             */
-/*   Updated: 2024/04/24 14:51:52 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/04/29 09:50:22 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@ enum e_state
 	DEAD = 0
 };
 
+typedef struct s_fork
+{
+	pthread_mutex_t	fork_mutex;
+	int				occupied;
+}				t_fork;
+
 typedef struct s_philo
 {
 	pthread_t		tid;
@@ -46,6 +52,8 @@ typedef struct s_philo
 	int				meals_count;
 	pthread_mutex_t	*fork_r;
 	pthread_mutex_t	*fork_l;
+	// t_fork			*fork_r;
+	// t_fork			*fork_l;
 	pthread_mutex_t	*philo_mutex;
 }				t_philo;
 
@@ -62,6 +70,7 @@ typedef struct s_data
 	int				end;
 	t_philo			*philos;
 	pthread_mutex_t	*forks;
+	// t_fork			*forks;
 	pthread_mutex_t	*philo_mutex;
 	pthread_mutex_t	data_mutex;
 }				t_data;
