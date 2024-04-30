@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 08:37:30 by yusengok          #+#    #+#             */
-/*   Updated: 2024/04/29 14:30:01 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/04/30 09:33:02 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	*routine(void *arg);
 void	*state_monitor(void *arg);
 int		wait_forks(t_philo *philo);
 void	take_first_fork(t_philo *philo);
-void	take_second_fork(t_philo *philo);
+int		take_second_fork(t_philo *philo);
 int		release_forks(t_philo *philo, int fork_count);
 void	eat(t_philo *philo);
 int		sleep_then_think(t_philo *philo);
