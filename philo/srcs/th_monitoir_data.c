@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 14:47:40 by yusengok          #+#    #+#             */
-/*   Updated: 2024/03/15 10:36:56 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/04/30 12:09:00 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	all_philos_finished(t_data *data)
 	if (data->finished_philos == data->philos_count && data->meals_to_eat != -1)
 	{
 		data->end = 1;
+		// printf("%06ld ", ft_timestamp(data));
+		// printf(GREEN "Everyone has finished to eat\n" RESET);
 		pthread_mutex_unlock(&data->data_mutex);
 		return (1);
 	}

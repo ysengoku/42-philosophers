@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:18:48 by yusengok          #+#    #+#             */
-/*   Updated: 2024/04/29 11:53:55 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/04/30 09:36:56 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,10 @@ static void	init_philo_content(t_data *data, int i)
 	data->philos[i].last_meal_time = 0;
 	data->philos[i].end_of_life = 0;
 	data->philos[i].meals_count = 0;
-	data->philos[i].fork_r = &(data->forks[i]);
-	data->philos[i].fork_l = &(data->forks[(i + 1) % data->philos_count]);
+	data->philos[i].fork_l = &(data->forks[i]);
+	if (data->philos_count == 1)
+		data->philos[i].fork_r = NULL;
+	else
+		data->philos[i].fork_r = &(data->forks[(i + 1) % data->philos_count]);
 	data->philos[i].is_running = 1;
 }
