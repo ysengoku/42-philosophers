@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 13:30:46 by yusengok          #+#    #+#             */
-/*   Updated: 2024/05/03 11:19:51 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/05/03 15:20:37 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ void	eat(t_philo *philo)
 	pthread_mutex_lock(&philo->p_mutex);
 	philo->last_meal_time = current_time();
 	philo->end_of_life = philo->last_meal_time + philo->data->time_to_die;
+	pthread_mutex_unlock(&philo->p_mutex);
 	ft_usleep(philo->data->time_to_eat);
+	pthread_mutex_lock(&philo->p_mutex);
 	philo->meals_count++;
 	pthread_mutex_unlock(&philo->p_mutex);
 	release_forks(philo, 2);
