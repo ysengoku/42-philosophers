@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 14:42:49 by yusengok          #+#    #+#             */
-/*   Updated: 2024/04/30 10:01:17 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/05/03 10:24:44 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	start_routine(t_data *data)
 		return (handle_thread_error(data, i));
 	i = 0;
 	while (i < data->philos_count)
-			pthread_join(data->philos[i++].tid, NULL);
+		pthread_join(data->philos[i++].tid, NULL);
 	pthread_join(data->tid, NULL);
 	return (0);
 }
