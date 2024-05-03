@@ -6,7 +6,7 @@
 #    By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 08:36:17 by yusengok          #+#    #+#              #
-#    Updated: 2024/04/30 12:07:17 by yusengok         ###   ########.fr        #
+#    Updated: 2024/05/03 11:20:59 by yusengok         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,8 @@ OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 DEPS = $(OBJS:.o=.d)
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -pthread -I$(INCLUDE) -g
+CFLAGS = -Wall -Wextra -Werror -pthread -I$(INCLUDE) 
+#-fsanitize=thread
 
 all:
 	@$(MAKE) $(NAME)
