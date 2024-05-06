@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 14:08:59 by yusengok          #+#    #+#             */
-/*   Updated: 2024/05/06 11:48:02 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/05/06 16:15:59 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 int	still_alive(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->p_mutex);
-	if ((current_time() > philo->end_of_life && philo->state != EATING))
+	if ((current_time() > philo->end_of_life && philo->state != EATING)
+		&& philo->meals_count != philo->data->meals_to_eat)
 	{
 		philo->state = DEAD;
 		pthread_mutex_unlock(&philo->p_mutex);
@@ -58,6 +59,7 @@ int	finished_all_meals(t_philo *philo)
 		pthread_mutex_unlock(&philo->p_mutex);
 		philo->data->finished_philos++;
 		pthread_mutex_unlock(&philo->data->data_mutex);
+		sleep_then_think(philo);
 		return (1);
 	}
 	pthread_mutex_unlock(&philo->data->data_mutex);
