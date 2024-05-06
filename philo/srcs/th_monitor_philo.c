@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 14:08:59 by yusengok          #+#    #+#             */
-/*   Updated: 2024/05/03 16:40:55 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/05/06 11:48:02 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,11 @@ int	still_alive(t_philo *philo)
 	pthread_mutex_lock(&philo->p_mutex);
 	if ((current_time() > philo->end_of_life && philo->state != EATING))
 	{
-		// philo->state = DEAD;
-		// pthread_mutex_lock(&philo->data->data_mutex);
-		// print_state(philo, DIE);
-		// philo->data->end = 1;
-		// pthread_mutex_unlock(&philo->data->data_mutex);
-		// pthread_mutex_unlock(&philo->p_mutex);
 		philo->state = DEAD;
 		pthread_mutex_unlock(&philo->p_mutex);
 		pthread_mutex_lock(&philo->data->data_mutex);
-		philo->data->end = 1;
 		print_state(philo, DIE);
+		philo->data->end = 1;
 		pthread_mutex_unlock(&philo->data->data_mutex);
 		return (0);
 	}

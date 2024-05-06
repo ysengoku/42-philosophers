@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 13:30:46 by yusengok          #+#    #+#             */
-/*   Updated: 2024/05/03 15:20:37 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/05/06 15:44:23 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,11 @@
 int	wait_forks(t_philo *philo)
 {
 	take_first_fork(philo);
-	// usleep(100);
 	if (check_state(philo, DEAD) == 1 || is_end(philo->data))
 		return (release_forks(philo, 1));
 	print_state(philo, TAKE_FORK);
 	if (take_second_fork(philo) == 1)
 		return (release_forks(philo, 1));
-	// usleep(100);
 	if (check_state(philo, DEAD) == 1 || is_end(philo->data))
 		return (release_forks(philo, 2));
 	print_state(philo, TAKE_FORK);
