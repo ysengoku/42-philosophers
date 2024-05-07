@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 14:42:49 by yusengok          #+#    #+#             */
-/*   Updated: 2024/05/03 10:24:44 by yusengok         ###   ########.fr       */
+/*   Updated: 2024/05/07 09:19:16 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	start_routine(t_data *data)
 		if (pthread_create(&(data->philos[i].tid), NULL, routine,
 				(void *)&data->philos[i]) != 0)
 			return (handle_thread_error(data, i));
+		print_state(&data->philos[i], THINK);
 		i++;
 	}
 	if (pthread_create(&(data->tid), NULL, state_monitor, (void *)data) != 0)
